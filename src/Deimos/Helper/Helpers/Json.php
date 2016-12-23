@@ -6,9 +6,40 @@ class Json implements InterfaceHelper
 {
 
     /**
-     * @var int
+     * @var array
      */
-    protected $options = JSON_UNESCAPED_UNICODE;
+    protected $options = [];
+
+    /**
+     * @return int
+     */
+    protected function options()
+    {
+        $options = JSON_ERROR_NONE;
+
+        foreach ($this->options as $option)
+        {
+            $options |= $option;
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param int $value
+     */
+    protected function addOption($value)
+    {
+        $this->options[] = $value;
+    }
+
+    /**
+     * @param array $options
+     */
+    protected function setOption(array $options)
+    {
+        $this->options = $options;
+    }
 
     /**
      * @param $data
@@ -17,17 +48,18 @@ class Json implements InterfaceHelper
      */
     public function encode($data)
     {
-        return json_encode($data, $this->options);
+        return json_encode($data, $this->options());
     }
 
     /**
-     * @param $data
+     * @param string $data
+     * @param bool   $assoc
      *
      * @return mixed
      */
-    public function decode($data)
+    public function decode($data, $assoc = true)
     {
-        return json_decode($data, $this->options);
+        return json_decode($data, $assoc, 512, $this->options());
     }
 
 }
