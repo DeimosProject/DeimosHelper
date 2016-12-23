@@ -42,7 +42,7 @@ class Helper
     {
         static $storage = [];
 
-        if ($storage[$name])
+        if (!$storage[$name])
         {
             $instance = $this->helpers[$name];
 
