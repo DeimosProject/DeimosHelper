@@ -172,12 +172,10 @@ class Str implements InterfaceHelper
     /**
      * @param int    $fileSize
      * @param int    $decimals
-     * @param string $dec_point
-     * @param string $thousands_sep
      *
      * @return float
      */
-    public function toHumanFileSize($fileSize, $decimals = 2, $dec_point = '.', $thousands_sep = '')
+    public function toHumanFileSize($fileSize, $decimals = 2)
     {
 
         $postfix = 'b';
@@ -202,7 +200,7 @@ class Str implements InterfaceHelper
                 break;
         }
 
-        return number_format($fileSize, $decimals, $dec_point, $thousands_sep) . $postfix;
+        return round($fileSize, $decimals) . ' ' . $postfix;
     }
 
 }
