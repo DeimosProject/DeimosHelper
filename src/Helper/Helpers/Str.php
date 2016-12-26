@@ -190,17 +190,54 @@ class Str implements InterfaceHelper
                 $postfix = 'Gb';
                 $fileSize /= (1<<30);
                 break;
-            case $fileSize >= ((1<<20)* 10):
+            case $fileSize >= ((1<<20) * 10):
                 $postfix = 'Mb';
                 $fileSize /= (1<<20);
                 break;
-            case $fileSize >= ((1<<10)* 10):
+            case $fileSize >= ((1<<10) * 10):
                 $postfix = 'Kb';
                 $fileSize /= (1<<10);
                 break;
         }
 
         return round($fileSize, $decimals) . ' ' . $postfix;
+    }
+
+    /**
+     * @param string $phone
+     *
+     * @return string mixed
+     */
+    public function phoneStrToNum($phone)
+    {
+
+        return preg_replace('/\D/', '', "$phone");
+    }
+
+    /**
+     * @param string|int $phone
+     *
+     * @return string
+     */
+    public function phoneNumToStr($phone)
+    {
+
+        $phone = $this->phoneStrToNum($phone);
+
+        if (strlen($phone) > 10)
+        {
+            $phone = substr($phone, strlen($phone) - 10);
+        }
+        if (strlen($phone) === 10)
+        {
+            $phone = '(' . substr($phone, 0, 3) . ') ' . substr($phone, 3, 3) . '-' . substr($phone, 6, 2) . '-' . substr($phone, 8);
+        }
+        elseif (strlen($phone) === 7)
+        {
+            $phone = substr($phone, 0, 3) . '-' . substr($phone, 3, 4);
+        }
+
+        return $phone;
     }
 
 }
