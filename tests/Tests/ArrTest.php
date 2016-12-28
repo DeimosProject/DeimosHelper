@@ -1,52 +1,30 @@
 <?php
 
-namespace Deimos\Helper\Helpers;
+namespace Tests;
 
 use Deimos\Helper\Exceptions\ExceptionEmpty;
+use Deimos\Helper\Helpers\Arr;
 
-class Arr implements InterfaceHelper
+class ArrTest
 {
 
-    /**
-     * @param array    $storage
-     * @param callable $callback
-     *
-     * @return array
-     */
-    public function map(array $storage, callable $callback)
+    public function map()
     {
-        return array_map($callback, $storage);
+        $array = [1,2,3,4];
+
+        $arr =
     }
 
-    /**
-     * @param array    $storage
-     * @param callable $callback
-     *
-     * @return array
-     */
     public function filter(array $storage, callable $callback)
     {
         return array_filter($storage, $callback);
     }
 
-    /**
-     * @param array  $storage
-     * @param string $key
-     *
-     * @return bool
-     */
-    public function keyExists(array $storage, $key)
+    public function keyExists($key, array $storage)
     {
         return array_key_exists($key, $storage);
     }
 
-    /**
-     * @param array $storage
-     * @param array $keys
-     *
-     * @return array|mixed
-     * @throws ExceptionEmpty
-     */
     protected function findPath(array $storage, array $keys)
     {
         if (empty($keys))
@@ -69,23 +47,11 @@ class Arr implements InterfaceHelper
         return $rows;
     }
 
-    /**
-     * @param string $key
-     *
-     * @return array
-     */
     protected function keys($key)
     {
         return explode('.', $key);
     }
 
-    /**
-     * @param array  $storage
-     * @param string $key
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
     public function get(array $storage, $key, $default = null)
     {
         try
@@ -98,16 +64,8 @@ class Arr implements InterfaceHelper
         }
     }
 
-    /**
-     * @param array $storage
-     * @param null  $key
-     *
-     * @return array|mixed
-     * @throws ExceptionEmpty
-     */
     public function getRequired(array $storage, $key = null)
     {
         return $this->findPath($storage, $this->keys($key));
     }
-
 }
