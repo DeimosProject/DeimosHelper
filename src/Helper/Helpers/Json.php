@@ -28,7 +28,7 @@ class Json implements InterfaceHelper
     /**
      * @param int $value
      */
-    protected function addOption($value)
+    public function addOption($value)
     {
         $this->options[] = $value;
     }
@@ -36,7 +36,7 @@ class Json implements InterfaceHelper
     /**
      * @param array $options
      */
-    protected function setOption(array $options)
+    public function setOption(array $options)
     {
         $this->options = $options;
     }
