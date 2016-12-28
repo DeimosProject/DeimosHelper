@@ -1,27 +1,24 @@
 <?php
 
+namespace DeimosTest;
+
 use Deimos\Builder\Builder;
-use Deimos\Helper\Exceptions\ExceptionEmpty;
-use Deimos\Helper\Helpers\Arr;
+use Deimos\Helper\Helper;
 
 class TestsSetUp extends \PHPUnit_Framework_TestCase
 {
 
+    /**
+     * @var Helper
+     */
     protected $helper;
 
     public function setUp()
     {
 
         $builder = new Builder();
-        $this->helper = new Arr();
+        $this->helper = new Helper($builder);
 
-    }
-
-    public function map()
-    {
-        $array = [1,2,3,4];
-
-        $arr =
     }
 
 }

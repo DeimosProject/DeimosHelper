@@ -58,7 +58,7 @@ class Arr implements InterfaceHelper
 
         foreach ($keys as $key)
         {
-            if (!$this->keyExists($key, $rows))
+            if (!$this->keyExists($rows, $key))
             {
                 throw new ExceptionEmpty("Key {$key} not found");
             }
