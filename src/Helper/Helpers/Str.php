@@ -5,7 +5,7 @@ namespace Deimos\Helper\Helpers;
 class Str implements InterfaceHelper
 {
 
-    const DIGITS = '0123456789';
+    const DIGITS   = '0123456789';
     const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     /**
@@ -49,15 +49,17 @@ class Str implements InterfaceHelper
      * @param  string  $str
      * @param  integer $length
      * @param  string  $end
+     *
      * @return string
      */
     public function shorten($str, $length = 100, $end = '&#8230;')
     {
 
-        if (strlen($str) > $length) {
+        if (strlen($str) > $length)
+        {
             $str = substr(trim($str), 0, $length);
             $str = substr($str, 0, -strpos(strrev($str), ' '));
-            $str = trim($str.$end);
+            $str = trim($str . $end);
         }
 
         return $str;
@@ -68,6 +70,7 @@ class Str implements InterfaceHelper
      *
      * @param  integer $length
      * @param  string  $type
+     *
      * @return string
      *
      * @throws \Exception
@@ -98,80 +101,56 @@ class Str implements InterfaceHelper
     }
 
     /**
-     * Legacy method for randomStr
-     *
-     * @param int    $length
-     * @param string $type
-     * @return string
-     *
-     * @throws \Exception
-     */
-    public function password($length = 32, $type = 'alnum') {
-
-        return $this->randomStr($length, $type);
-    }
-
-    /**
      * Format amount of money based on locale
      *
-     * @param  float $amount
+     * @param  float  $amount
      * @param  string $currency
      * @param  string $locale [ de tr pt it nl fr ru en ]
+     *
      * @return string
      */
     public function formatMoney($amount, $currency = '€', $locale = 'en')
     {
         $symbols = array('€', '$', '£', '¥', '₤', 'kr', '₺');
-        switch ($locale) {
+        switch ($locale)
+        {
             case 'de':
             case 'tr':
             case 'pt':
                 $amount = number_format($amount, 2, ',', '.');
-                $space = ' ';
-                $format = is_string($currency) ? $amount.$space.$currency : $amount;
+                $space  = ' ';
+                $format = is_string($currency) ? $amount . $space . $currency : $amount;
                 break;
             case 'it':
             case 'nl':
                 $amount = number_format($amount, 2, ',', '.');
-                $space = ' ';
-                $format = is_string($currency) ? $currency.$space.$amount : $amount;
+                $space  = ' ';
+                $format = is_string($currency) ? $currency . $space . $amount : $amount;
                 break;
             case 'fr':
                 $amount = number_format($amount, 2, ',', ' ');
-                $space = ' ';
-                $format = is_string($currency) ? $amount.$space.$currency : $amount;
+                $space  = ' ';
+                $format = is_string($currency) ? $amount . $space . $currency : $amount;
                 break;
             case 'ru':
                 $amount = number_format($amount, 2, ',', ' ');
-                $space = in_array($currency, $symbols) ? '' : ' ';
-                $format = is_string($currency) ? $amount.$space.$currency : $amount;
+                $space  = in_array($currency, $symbols) ? '' : ' ';
+                $format = is_string($currency) ? $amount . $space . $currency : $amount;
                 break;
             default:
             case 'en':
                 $amount = number_format($amount, 2, '.', ',');
-                $space = in_array($currency, $symbols) ? '' : ' ';
-                $format = is_string($currency) ? $currency.$space.$amount : $amount;
+                $space  = in_array($currency, $symbols) ? '' : ' ';
+                $format = is_string($currency) ? $currency . $space . $amount : $amount;
                 break;
         }
+
         return $format;
     }
 
     /**
-     * Legacy method for 'formatMoney'
-     *
-     * @param  float    $amount
-     * @param  string   $currency
-     * @param  string $locale [ de tr pt it nl fr ru en ]
-     * @return string
-     */
-    public function moneyFormat($amount, $currency = '€', $locale = 'en')
-    {
-        return $this->formatMoney($amount, $currency, $locale);
-    }
-
-    /**
-     * @param int    $fileSize
-     * @param int    $decimals
+     * @param int $fileSize
+     * @param int $decimals
      *
      * @return float
      */
@@ -182,25 +161,25 @@ class Str implements InterfaceHelper
 
         switch (true)
         {
-            case $fileSize >= ((1<<50) * 10):
+            case $fileSize >= ((1 << 50) * 10):
                 $postfix = 'PB';
-                $fileSize /= (1<<50);
+                $fileSize /= (1 << 50);
                 break;
-            case $fileSize >= ((1<<40) * 10):
+            case $fileSize >= ((1 << 40) * 10):
                 $postfix = 'TB';
-                $fileSize /= (1<<40);
+                $fileSize /= (1 << 40);
                 break;
-            case $fileSize >= ((1<<30) * 10):
+            case $fileSize >= ((1 << 30) * 10):
                 $postfix = 'GB';
-                $fileSize /= (1<<30);
+                $fileSize /= (1 << 30);
                 break;
-            case $fileSize >= ((1<<20) * 10):
+            case $fileSize >= ((1 << 20) * 10):
                 $postfix = 'MB';
-                $fileSize /= (1<<20);
+                $fileSize /= (1 << 20);
                 break;
-            case $fileSize >= ((1<<10) * 10):
+            case $fileSize >= ((1 << 10) * 10):
                 $postfix = 'KB';
-                $fileSize /= (1<<10);
+                $fileSize /= (1 << 10);
                 break;
         }
 
@@ -212,36 +191,10 @@ class Str implements InterfaceHelper
      *
      * @return string mixed
      */
-    public function phoneStrToNum($phone)
+    public function stringToNumber($phone)
     {
 
-        return preg_replace('/\D/', '', "$phone");
-    }
-
-    /**
-     * @param string|int $phone
-     *
-     * @return string
-     */
-    public function phoneNumToStr($phone)
-    {
-
-        $phone = $this->phoneStrToNum($phone);
-
-        if (strlen($phone) > 10)
-        {
-            $phone = substr($phone, strlen($phone) - 10);
-        }
-        if (strlen($phone) === 10)
-        {
-            $phone = '(' . substr($phone, 0, 3) . ') ' . substr($phone, 3, 3) . '-' . substr($phone, 6, 2) . '-' . substr($phone, 8);
-        }
-        elseif (strlen($phone) === 7)
-        {
-            $phone = substr($phone, 0, 3) . '-' . substr($phone, 3, 4);
-        }
-
-        return $phone;
+        return preg_replace('/\D/', '', $phone);
     }
 
 }

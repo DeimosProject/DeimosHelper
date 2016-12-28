@@ -8,14 +8,15 @@ class ArrTest extends \DeimosTest\TestsSetUp
 {
 
     protected $array = [
-        1,2,3,4,
-        'b'=>5,
-        'p'=>6,
-        7,8,9
+        1, 2, 3, 4,
+        'b' => 5,
+        'p' => 6,
+        7, 8, 9
     ];
 
     public function testMap()
     {
+
         $resultArray = $this->helper->arr()->map($this->array, function ($element)
         {
 
@@ -25,7 +26,7 @@ class ArrTest extends \DeimosTest\TestsSetUp
         foreach ($this->array as $key => $value)
         {
 
-            assert(($value * $value) === $resultArray[$key]);
+            $this->assertEquals($value * $value, $resultArray[$key]);
         }
     }
 
@@ -41,7 +42,7 @@ class ArrTest extends \DeimosTest\TestsSetUp
         foreach ($resultArray as $key => $value)
         {
 
-            assert(($key%2) === 1);
+            $this->assertEquals($key % 2, 1);
         }
 
     }
@@ -49,33 +50,40 @@ class ArrTest extends \DeimosTest\TestsSetUp
     public function testKeyExists()
     {
 
-        assert($this->helper->arr()->keyExists($this->array, 0));
-        assert($this->helper->arr()->keyExists($this->array, 3));
-        assert(!$this->helper->arr()->keyExists($this->array, 99));
-        assert(!$this->helper->arr()->keyExists($this->array, 'a'));
-        assert(!$this->helper->arr()->keyExists($this->array, ' '));
+        $this->assertTrue($this->helper->arr()->keyExists($this->array, 0));
+        $this->assertTrue($this->helper->arr()->keyExists($this->array, 3));
+        $this->assertNotTrue($this->helper->arr()->keyExists($this->array, 99));
+        $this->assertNotTrue($this->helper->arr()->keyExists($this->array, 'a'));
+        $this->assertNotTrue($this->helper->arr()->keyExists($this->array, ' '));
     }
 
     public function testGet()
     {
-        assert($this->helper->arr()->get($this->array, 0) === 1);
-        assert($this->helper->arr()->get($this->array, 0, 'a') === 1);
-        assert($this->helper->arr()->get($this->array, 'a', 'c') === 'c');
-        assert($this->helper->arr()->get($this->array, 3, 'c') === 4);
-        assert($this->helper->arr()->get($this->array, 'c', null) === null);
+
+        $this->assertEquals($this->helper->arr()->get($this->array, 0), 1);
+        $this->assertEquals($this->helper->arr()->get($this->array, 0, 'a'), 1);
+        $this->assertEquals($this->helper->arr()->get($this->array, 'a', 'c'), 'c');
+        $this->assertEquals($this->helper->arr()->get($this->array, 3, 'c'), 4);
+        $this->assertNull($this->helper->arr()->get($this->array, 'c', null));
     }
 
     public function testGetRequired()
     {
+
         $this->helper->arr()->getRequired($this->array, 0);
         $this->helper->arr()->getRequired($this->array, 3);
         $this->helper->arr()->getRequired($this->array, 'b');
 
-        try {
+        try
+        {
 
             $this->helper->arr()->getRequired($this->array, 'd');
 
             throw new \Exception();
-        } catch (ExceptionEmpty $e) {}
+        }
+        catch (ExceptionEmpty $e)
+        {
+        }
     }
+
 }
