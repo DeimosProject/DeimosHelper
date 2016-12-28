@@ -178,24 +178,28 @@ class Str implements InterfaceHelper
     public function toHumanFileSize($fileSize, $decimals = 2)
     {
 
-        $postfix = 'b';
+        $postfix = 'B';
 
         switch (true)
         {
+            case $fileSize >= ((1<<50) * 10):
+                $postfix = 'PB';
+                $fileSize /= (1<<50);
+                break;
             case $fileSize >= ((1<<40) * 10):
-                $postfix = 'Tb';
+                $postfix = 'TB';
                 $fileSize /= (1<<40);
                 break;
             case $fileSize >= ((1<<30) * 10):
-                $postfix = 'Gb';
+                $postfix = 'GB';
                 $fileSize /= (1<<30);
                 break;
             case $fileSize >= ((1<<20) * 10):
-                $postfix = 'Mb';
+                $postfix = 'MB';
                 $fileSize /= (1<<20);
                 break;
             case $fileSize >= ((1<<10) * 10):
-                $postfix = 'Kb';
+                $postfix = 'KB';
                 $fileSize /= (1<<10);
                 break;
         }
