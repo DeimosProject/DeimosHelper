@@ -154,7 +154,7 @@ class Str implements InterfaceHelper
      *
      * @return float
      */
-    public function toHumanFileSize($fileSize, $decimals = 2)
+    public function fileSize($fileSize, $decimals = 2)
     {
 
         $postfix = 'B';
