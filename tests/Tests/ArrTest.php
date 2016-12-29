@@ -33,12 +33,15 @@ class ArrTest extends \DeimosTest\TestsSetUp
     public function testFilter()
     {
 
-        $resultArray = $this->helper->arr()->odd($this->array);
-
-        $this->helper->arr()->map($resultArray, function($value)
+        $resultArray = $this->helper->arr()->filter($this->array, function ($var)
         {
-            $this->assertEquals($this->helper->math()->isOdd($value), true);
+            return ($var & 1);
         });
+
+        foreach ($resultArray as $key => $value)
+        {
+            $this->assertEquals($value % 2, 1);
+        }
 
     }
 
