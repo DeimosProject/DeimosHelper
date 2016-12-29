@@ -117,7 +117,6 @@ class Helper extends Builder
         return new Helpers\File($this);
     }
 
-
     /**
      * @return Helpers\Dir
      */
