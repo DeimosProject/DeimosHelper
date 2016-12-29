@@ -31,6 +31,29 @@ class Arr extends AbstractHelper
     }
 
     /**
+     * @param     $string
+     * @param     $length
+     * @param int $start
+     *
+     * @return array
+     */
+    public function fill($string, $length, $start = 0)
+    {
+        return array_fill($string, $length, $start);
+    }
+
+    /**
+     * @param mixed $begin
+     * @param mixed $end
+     *
+     * @return mixed
+     */
+    public function range($begin, $end)
+    {
+        return $this->range($begin, $end);
+    }
+
+    /**
      * @param array $storage
      * @param mixed $needle
      *
