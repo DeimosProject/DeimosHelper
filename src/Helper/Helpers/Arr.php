@@ -31,6 +31,28 @@ class Arr extends AbstractHelper
     }
 
     /**
+     * @param array $storage
+     * @param mixed $needle
+     *
+     * @return bool
+     */
+    public function inStrict(array $storage, $needle)
+    {
+        return in_array($needle, $storage, true);
+    }
+
+    /**
+     * @param array $storage
+     * @param mixed $needle
+     *
+     * @return bool
+     */
+    public function in(array $storage, $needle)
+    {
+        return in_array($needle, $storage, false);
+    }
+
+    /**
      * @param array  $storage
      * @param string $key
      * @param mixed  $default
