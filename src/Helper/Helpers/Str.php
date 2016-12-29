@@ -156,7 +156,6 @@ class Str extends AbstractHelper
      */
     public function toNumber($string)
     {
-
         return preg_replace('/\D/', '', $string);
     }
 

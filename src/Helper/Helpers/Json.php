@@ -15,8 +15,6 @@ class Json extends AbstractHelper
     protected $options = [];
 
     /**
-     * fixme
-     *
      * @param int $value
      * @param int $target
      */
