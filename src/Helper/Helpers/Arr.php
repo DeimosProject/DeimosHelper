@@ -53,6 +53,167 @@ class Arr extends AbstractHelper
     }
 
     /**
+     * @param array $storage
+     *
+     * @return array
+     */
+    public function shuffle(array &$storage)
+    {
+        return shuffle($storage);
+    }
+
+    /**
+     * @param array $storage
+     * @param       $mixed
+     *
+     * @return mixed
+     */
+    public function push(array &$storage, $mixed)
+    {
+        return array_push($storage, $mixed);
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return mixed
+     */
+    public function pop(array &$storage)
+    {
+        return array_pop($storage);
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return mixed
+     */
+    public function shift(array &$storage)
+    {
+        return array_shift($storage);
+    }
+
+    /**
+     * @param array $storage
+     * @param       $mixed
+     *
+     * @return mixed
+     */
+    public function unShift(array &$storage, $mixed)
+    {
+        return array_unshift($storage, $mixed);
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return mixed
+     */
+    public function first(array $storage)
+    {
+        reset($storage);
+
+        return current($storage);
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return mixed
+     */
+    public function last(array $storage)
+    {
+        return end($storage);
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return mixed
+     */
+    public function firstKey(array $storage)
+    {
+        reset($storage);
+
+        return key($storage);
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return mixed
+     */
+    public function lastKey(array $storage)
+    {
+        end($storage);
+
+        return key($storage);
+    }
+
+    /**
+     * @param array  $storage
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public function at(array $storage, $key)
+    {
+        return $storage[$key];
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return array
+     */
+    public function oddKey(array $storage)
+    {
+        return $this->filter($storage, function ($value, $key)
+        {
+            return $this->helper->math()->isOdd($key);
+        });
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return array
+     */
+    public function evenKey(array $storage)
+    {
+        return $this->filter($storage, function ($value, $key)
+        {
+            return $this->helper->math()->isEven($key);
+        });
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return array
+     */
+    public function odd(array $storage)
+    {
+        return $this->filter($storage, function ($value)
+        {
+            return $this->helper->math()->isOdd($value);
+        });
+    }
+
+    /**
+     * @param array $storage
+     *
+     * @return array
+     */
+    public function even(array $storage)
+    {
+        return $this->filter($storage, function ($value)
+        {
+            return $this->helper->math()->isEven($value);
+        });
+    }
+
+    /**
      * @param array  $storage
      * @param string $key
      * @param mixed  $default

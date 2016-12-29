@@ -38,4 +38,24 @@ class Math extends AbstractHelper
         return sqrt($argument);
     }
 
+    /**
+     * @param int $argument
+     *
+     * @return bool
+     */
+    public function isOdd($argument)
+    {
+        return !$this->isEven($argument);
+    }
+
+    /**
+     * @param int $argument
+     *
+     * @return bool
+     */
+    public function isEven($argument)
+    {
+        return !($argument & 1);
+    }
+
 }
