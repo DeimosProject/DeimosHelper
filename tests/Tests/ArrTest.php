@@ -35,14 +35,12 @@ class ArrTest extends \DeimosTest\TestsSetUp
 
         $resultArray = $this->helper->arr()->filter($this->array, function ($var)
         {
-
             return ($var & 1);
         });
 
         foreach ($resultArray as $key => $value)
         {
-
-            $this->assertEquals($key % 2, 1);
+            $this->assertEquals($value % 2, 1);
         }
 
     }
@@ -66,7 +64,7 @@ class ArrTest extends \DeimosTest\TestsSetUp
         $this->assertEquals($this->helper->arr()->get($this->array, 3, 'c'), 4);
         $this->assertNull($this->helper->arr()->get($this->array, 'c', null));
     }
-
+    
     public function testGetRequired()
     {
 
