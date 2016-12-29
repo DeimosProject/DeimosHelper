@@ -39,7 +39,7 @@ class Arr extends AbstractHelper
      */
     public function fill($string, $length, $start = 0)
     {
-        return array_fill($string, $length, $start);
+        return array_fill($start, $length, $string);
     }
 
     /**
