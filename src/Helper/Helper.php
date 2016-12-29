@@ -2,59 +2,31 @@
 
 namespace Deimos\Helper;
 
-use Deimos\Helper\Helpers\InterfaceHelper;
+use Deimos\Builder\Builder;
 
-class Helper
+class Helper extends Builder
 {
 
     /***
-     * @var \Deimos\Builder\Builder
+     * @var Builder
      */
     protected $builder;
 
     /**
-     * @var array
-     */
-    protected $helpers = [
-        'arr'  => Helpers\Arr::class,
-        'json' => Helpers\Json::class,
-        'str'  => Helpers\Str::class,
-    ];
-
-    /**
      * Helper constructor.
      *
-     * @param \Deimos\Builder\Builder $builder
-     */
-    public function __construct(\Deimos\Builder\Builder $builder)
-    {
-        $this->builder = $builder;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return InterfaceHelper
+     * @param Builder $builder
      *
      * @throws \InvalidArgumentException
      */
-    protected function instance($name)
+    public function __construct(Builder $builder)
     {
-        static $storage = [];
-
-        if (empty($storage[$name]))
+        if ($builder instanceof self)
         {
-            $instance = $this->helpers[$name];
-
-            $storage[$name] = new $instance($this->builder);
-
-            if (!($storage[$name] instanceof InterfaceHelper))
-            {
-                throw new \InvalidArgumentException('Error ' . $name . ' from ' . __CLASS__);
-            }
+            throw new \InvalidArgumentException('Instanceof SELF');
         }
 
-        return $storage[$name];
+        $this->builder = $builder;
     }
 
     /**
@@ -79,6 +51,95 @@ class Helper
     public function json()
     {
         return $this->instance('json');
+    }
+
+    /**
+     * @return Helpers\File
+     */
+    public function file()
+    {
+        return $this->instance('file');
+    }
+
+    /**
+     * @return Helpers\Dir
+     */
+    public function dir()
+    {
+        return $this->instance('dir');
+    }
+
+    /**
+     * @return Helpers\Money
+     */
+    public function money()
+    {
+        return $this->instance('money');
+    }
+
+    /**
+     * @return Helpers\Math
+     */
+    public function math()
+    {
+        return $this->instance('math');
+    }
+
+    /**
+     * @return Helpers\Arr
+     */
+    protected function buildArr()
+    {
+        return new Helpers\Arr($this);
+    }
+
+    /**
+     * @return Helpers\Str
+     */
+    protected function buildStr()
+    {
+        return new Helpers\Str($this);
+    }
+
+    /**
+     * @return Helpers\Json
+     */
+    protected function buildJson()
+    {
+        return new Helpers\Json($this);
+    }
+
+    /**
+     * @return Helpers\File
+     */
+    protected function buildFile()
+    {
+        return new Helpers\File($this);
+    }
+
+
+    /**
+     * @return Helpers\Dir
+     */
+    protected function buildDir()
+    {
+        return new Helpers\Dir($this);
+    }
+
+    /**
+     * @return Helpers\Money
+     */
+    protected function buildMoney()
+    {
+        return new Helpers\Money($this);
+    }
+
+    /**
+     * @return Helpers\Math
+     */
+    protected function buildMath()
+    {
+        return new Helpers\Math($this);
     }
 
 }

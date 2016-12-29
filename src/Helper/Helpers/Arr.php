@@ -2,9 +2,10 @@
 
 namespace Deimos\Helper\Helpers;
 
+use Deimos\Helper\AbstractHelper;
 use Deimos\Helper\Exceptions\ExceptionEmpty;
 
-class Arr implements InterfaceHelper
+class Arr extends AbstractHelper
 {
 
     /**
@@ -32,12 +33,20 @@ class Arr implements InterfaceHelper
     /**
      * @param array  $storage
      * @param string $key
+     * @param mixed  $default
      *
-     * @return bool
+     * @return mixed
      */
-    public function keyExists(array $storage, $key)
+    public function get(array $storage, $key, $default = null)
     {
-        return array_key_exists($key, $storage);
+        try
+        {
+            return $this->findPath($storage, $this->keys($key));
+        }
+        catch (ExceptionEmpty $empty)
+        {
+            return $default;
+        }
     }
 
     /**
@@ -70,6 +79,17 @@ class Arr implements InterfaceHelper
     }
 
     /**
+     * @param array  $storage
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function keyExists(array $storage, $key)
+    {
+        return array_key_exists($key, $storage);
+    }
+
+    /**
      * @param string $key
      *
      * @return array
@@ -77,25 +97,6 @@ class Arr implements InterfaceHelper
     protected function keys($key)
     {
         return explode('.', $key);
-    }
-
-    /**
-     * @param array  $storage
-     * @param string $key
-     * @param mixed  $default
-     *
-     * @return mixed
-     */
-    public function get(array $storage, $key, $default = null)
-    {
-        try
-        {
-            return $this->findPath($storage, $this->keys($key));
-        }
-        catch (ExceptionEmpty $empty)
-        {
-            return $default;
-        }
     }
 
     /**

@@ -2,16 +2,242 @@
 
 namespace Deimos\Helper\Helpers;
 
-class Str implements InterfaceHelper
+use Deimos\Helper\AbstractHelper;
+
+class Str extends AbstractHelper
 {
 
     const DIGITS   = '0123456789';
     const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+    const RAND_ALPHA     = 1;
+    const RAND_NUM       = 2;
+    const RAND_ALPHA_NUM = self::RAND_ALPHA + self::RAND_NUM;
+    const RAND_MD5       = 30;
+    const RAND_SHA1      = 31;
+
     /**
-     * translite cyr->lat
+     * Shortens text to length and keeps integrity of words
+     *
+     * @param  string  $str
+     * @param  integer $length
+     * @param  string  $end
+     *
+     * @return string
      */
-    public function translit($str)
+    public function shorten($str, $length = 100, $end = '&#8230;')
+    {
+
+        if (strlen($str) > $length)
+        {
+            $str = substr(trim($str), 0, $length);
+            $str = substr($str, 0, -strpos(strrev($str), ' '));
+            $str = trim($str . $end);
+        }
+
+        return $str;
+    }
+
+    /**
+     * @param $string
+     *
+     * @return int
+     */
+    public function len($string)
+    {
+        return mb_strlen($string);
+    }
+
+    /**
+     * @param string $string
+     * @param string $needle
+     * @param int    $offset
+     *
+     * @return int
+     */
+    public function pos($string, $needle, $offset = null)
+    {
+        return mb_strpos($string, $needle, $offset);
+    }
+
+    /**
+     * @param string $string
+     * @param int    $multiplier
+     *
+     * @return string
+     */
+    public function repeat($string, $multiplier)
+    {
+        return str_repeat($string, $multiplier);
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    public function shuffle($string)
+    {
+        return str_shuffle($string);
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    public function ucFirst($string)
+    {
+        $first = $this->sub($string, 0, 1);
+        $first = $this->upp($first);
+
+        return $first . $this->sub($string, 1);
+    }
+
+    /**
+     * @param string $string
+     * @param int    $start
+     * @param int    $length
+     *
+     * @return string
+     */
+    public function sub($string, $start, $length = null)
+    {
+        return mb_substr($string, $start, $length);
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    public function upp($string)
+    {
+        return mb_convert_case($string, MB_CASE_UPPER);
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    public function low($string)
+    {
+        return mb_convert_case($string, MB_CASE_LOWER);
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    public function capitalize($string)
+    {
+        return mb_convert_case($string, MB_CASE_TITLE);
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string mixed
+     */
+    public function toNumber($string)
+    {
+
+        return preg_replace('/\D/', '', $string);
+    }
+
+    /**
+     * Return random string
+     *
+     * @param  int $length
+     * @param  int $type
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function random($length = 32, $type = self::RAND_ALPHA_NUM)
+    {
+        switch ($type)
+        {
+            case self::RAND_ALPHA:
+                $pool = self::ALPHABET;
+                break;
+
+            case self::RAND_ALPHA_NUM:
+                $pool = self::DIGITS . self::ALPHABET;
+                break;
+
+            case self::RAND_NUM:
+                $pool = self::DIGITS;
+                break;
+
+            case self::RAND_MD5:
+                return md5(uniqid(mt_rand(), true));
+                break;
+
+            case self::RAND_SHA1:
+                return sha1(uniqid(mt_rand(), true));
+                break;
+
+            default:
+                throw new \InvalidArgumentException("Invalid random string type [{$type}].");
+        }
+
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
+
+    /**
+     * @param int $size
+     * @param int $decimals
+     *
+     * @return float
+     */
+    public function fileSize($size, $decimals = 2)
+    {
+
+        $postfix = 'B';
+
+        switch (true)
+        {
+            case $size >= ((1 << 50) * 10):
+                $postfix = 'PB';
+                $size /= (1 << 50);
+                break;
+
+            case $size >= ((1 << 40) * 10):
+                $postfix = 'TB';
+                $size /= (1 << 40);
+                break;
+
+            case $size >= ((1 << 30) * 10):
+                $postfix = 'GB';
+                $size /= (1 << 30);
+                break;
+
+            case $size >= ((1 << 20) * 10):
+                $postfix = 'MB';
+                $size /= (1 << 20);
+                break;
+
+            case $size >= ((1 << 10) * 10):
+                $postfix = 'KB';
+                $size /= (1 << 10);
+                break;
+        }
+
+        return round($size, $decimals) . ' ' . $postfix;
+    }
+
+    /**
+     * transliteration cyr->lat
+     *
+     * @param $str
+     *
+     * @return string
+     */
+    public function transliteration($str)
     {
 
         return strtr($str, [
@@ -41,160 +267,6 @@ class Str implements InterfaceHelper
                 '№' => 'N',
             ]
         );
-    }
-
-    /**
-     * Shortens text to length and keeps integrity of words
-     *
-     * @param  string  $str
-     * @param  integer $length
-     * @param  string  $end
-     *
-     * @return string
-     */
-    public function shorten($str, $length = 100, $end = '&#8230;')
-    {
-
-        if (strlen($str) > $length)
-        {
-            $str = substr(trim($str), 0, $length);
-            $str = substr($str, 0, -strpos(strrev($str), ' '));
-            $str = trim($str . $end);
-        }
-
-        return $str;
-    }
-
-    /**
-     * Return random string
-     *
-     * @param  integer $length
-     * @param  string  $type
-     *
-     * @return string
-     *
-     * @throws \Exception
-     */
-    public function randomStr($length = 32, $type = 'alnum')
-    {
-        switch ($type)
-        {
-            case 'alpha':
-                $pool = self::ALPHABET;
-                break;
-            case 'alnum':
-            case 'alphanum':
-                $pool = self::DIGITS . self::ALPHABET;
-                break;
-            case 'num':
-            case 'numeric':
-                $pool = self::DIGITS;
-                break;
-            case 'md5':
-                return md5(uniqid(mt_rand(), true));
-                break;
-            default:
-                throw new \Exception("Invalid random string type [{$type}].");
-        }
-
-        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
-    }
-
-    /**
-     * Format amount of money based on locale
-     *
-     * @param  float  $amount
-     * @param  string $currency
-     * @param  string $locale [ de tr pt it nl fr ru en ]
-     *
-     * @return string
-     */
-    public function formatMoney($amount, $currency = '€', $locale = 'en')
-    {
-        $symbols = array('€', '$', '£', '¥', '₤', 'kr', '₺');
-        switch ($locale)
-        {
-            case 'de':
-            case 'tr':
-            case 'pt':
-                $amount = number_format($amount, 2, ',', '.');
-                $space  = ' ';
-                $format = is_string($currency) ? $amount . $space . $currency : $amount;
-                break;
-            case 'it':
-            case 'nl':
-                $amount = number_format($amount, 2, ',', '.');
-                $space  = ' ';
-                $format = is_string($currency) ? $currency . $space . $amount : $amount;
-                break;
-            case 'fr':
-                $amount = number_format($amount, 2, ',', ' ');
-                $space  = ' ';
-                $format = is_string($currency) ? $amount . $space . $currency : $amount;
-                break;
-            case 'ru':
-                $amount = number_format($amount, 2, ',', ' ');
-                $space  = in_array($currency, $symbols) ? '' : ' ';
-                $format = is_string($currency) ? $amount . $space . $currency : $amount;
-                break;
-            default:
-            case 'en':
-                $amount = number_format($amount, 2, '.', ',');
-                $space  = in_array($currency, $symbols) ? '' : ' ';
-                $format = is_string($currency) ? $currency . $space . $amount : $amount;
-                break;
-        }
-
-        return $format;
-    }
-
-    /**
-     * @param int $fileSize
-     * @param int $decimals
-     *
-     * @return float
-     */
-    public function fileSize($fileSize, $decimals = 2)
-    {
-
-        $postfix = 'B';
-
-        switch (true)
-        {
-            case $fileSize >= ((1 << 50) * 10):
-                $postfix = 'PB';
-                $fileSize /= (1 << 50);
-                break;
-            case $fileSize >= ((1 << 40) * 10):
-                $postfix = 'TB';
-                $fileSize /= (1 << 40);
-                break;
-            case $fileSize >= ((1 << 30) * 10):
-                $postfix = 'GB';
-                $fileSize /= (1 << 30);
-                break;
-            case $fileSize >= ((1 << 20) * 10):
-                $postfix = 'MB';
-                $fileSize /= (1 << 20);
-                break;
-            case $fileSize >= ((1 << 10) * 10):
-                $postfix = 'KB';
-                $fileSize /= (1 << 10);
-                break;
-        }
-
-        return round($fileSize, $decimals) . ' ' . $postfix;
-    }
-
-    /**
-     * @param string $phone
-     *
-     * @return string mixed
-     */
-    public function stringToNumber($phone)
-    {
-
-        return preg_replace('/\D/', '', $phone);
     }
 
 }

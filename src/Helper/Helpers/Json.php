@@ -2,33 +2,17 @@
 
 namespace Deimos\Helper\Helpers;
 
-class Json implements InterfaceHelper
+use Deimos\Helper\AbstractHelper;
+
+class Json extends AbstractHelper
 {
 
+    const OPTIONS_ENCODE = 0;
+    const OPTIONS_DECODE = 1;
     /**
      * @var array
      */
     protected $options = [];
-
-    const OPTIONS_ENCODE = 0;
-    const OPTIONS_DECODE = 1;
-
-    /**
-     * @param int $target
-     *
-     * @return int
-     */
-    protected function options($target)
-    {
-        $options = JSON_ERROR_NONE;
-
-        foreach ($this->options[$target] as $option)
-        {
-            $options |= $option;
-        }
-
-        return $options;
-    }
 
     /**
      * @param int $value
@@ -47,11 +31,12 @@ class Json implements InterfaceHelper
 
     /**
      * @param array|int $options
-     * @param int $target
+     * @param int       $target
      */
     public function setOption($options, $target = self::OPTIONS_ENCODE)
     {
-        if(!is_array($options)) {
+        if (!is_array($options))
+        {
 
             $options = [$options];
         }
@@ -67,6 +52,23 @@ class Json implements InterfaceHelper
     public function encode($data)
     {
         return json_encode($data, $this->options(self::OPTIONS_ENCODE));
+    }
+
+    /**
+     * @param int $target
+     *
+     * @return int
+     */
+    protected function options($target)
+    {
+        $options = JSON_ERROR_NONE;
+
+        foreach ($this->options[$target] as $option)
+        {
+            $options |= $option;
+        }
+
+        return $options;
     }
 
     /**
