@@ -15,12 +15,14 @@ class Json extends AbstractHelper
     protected $options = [];
 
     /**
+     * fixme
+     *
      * @param int $value
      * @param int $target
      */
     public function addOption($value, $target = self::OPTIONS_ENCODE)
     {
-        if (!isset($this->options[$target]))
+        if (empty($this->options[$target]))
         {
 
             $this->options[$target] = [];
@@ -63,9 +65,12 @@ class Json extends AbstractHelper
     {
         $options = JSON_ERROR_NONE;
 
-        foreach ($this->options[$target] as $option)
+        if(isset($this->options[$target]))
         {
-            $options |= $option;
+            foreach ($this->options[$target] as $option)
+            {
+                $options |= $option;
+            }
         }
 
         return $options;
