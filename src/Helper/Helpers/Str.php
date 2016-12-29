@@ -96,6 +96,19 @@ class Str extends AbstractHelper
 
     /**
      * @param string $string
+     *
+     * @return string
+     */
+    public function lcFirst($string)
+    {
+        $first = $this->sub($string, 0, 1);
+        $first = $this->low($first);
+
+        return $first . $this->sub($string, 1);
+    }
+
+    /**
+     * @param string $string
      * @param int    $start
      * @param int    $length
      *

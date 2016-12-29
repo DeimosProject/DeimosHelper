@@ -27,4 +27,24 @@ class File extends AbstractHelper
         return filesize($path);
     }
 
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function readable($path)
+    {
+        return is_readable($path);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function isFile($path)
+    {
+        return (is_file($path) && !$this->helper->dir()->isDir($path));
+    }
+
 }

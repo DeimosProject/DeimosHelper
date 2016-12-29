@@ -22,4 +22,14 @@ class Dir extends AbstractHelper
         return true;
     }
 
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function isDir($path)
+    {
+        return is_dir($path);
+    }
+
 }
