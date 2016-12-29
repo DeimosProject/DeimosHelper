@@ -11,7 +11,8 @@
     "deimos/builder": "^0.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "~5.7"
+    "phpunit/phpunit": "~5.7",
+    "codeclimate/php-test-reporter": "dev-master"
   },
   "autoload": {
     "psr-4": {
