@@ -34,7 +34,10 @@ class Helper extends Builder
      */
     public function arr()
     {
-        return $this->instance('arr');
+        return $this->once(function ()
+        {
+            return new Helpers\Arr($this);
+        });
     }
 
     /**
@@ -42,7 +45,10 @@ class Helper extends Builder
      */
     public function str()
     {
-        return $this->instance('str');
+        return $this->once(function ()
+        {
+            return new Helpers\Str($this);
+        });
     }
 
     /**
@@ -50,7 +56,10 @@ class Helper extends Builder
      */
     public function json()
     {
-        return $this->instance('json');
+        return $this->once(function ()
+        {
+            return new Helpers\Json($this);
+        });
     }
 
     /**
@@ -58,7 +67,10 @@ class Helper extends Builder
      */
     public function file()
     {
-        return $this->instance('file');
+        return $this->once(function ()
+        {
+            return new Helpers\File($this);
+        });
     }
 
     /**
@@ -66,7 +78,10 @@ class Helper extends Builder
      */
     public function dir()
     {
-        return $this->instance('dir');
+        return $this->once(function ()
+        {
+            return new Helpers\Dir($this);
+        });
     }
 
     /**
@@ -74,7 +89,10 @@ class Helper extends Builder
      */
     public function money()
     {
-        return $this->instance('money');
+        return $this->once(function ()
+        {
+            return new Helpers\Money($this);
+        });
     }
 
     /**
@@ -82,63 +100,10 @@ class Helper extends Builder
      */
     public function math()
     {
-        return $this->instance('math');
-    }
-
-    /**
-     * @return Helpers\Arr
-     */
-    protected function buildArr()
-    {
-        return new Helpers\Arr($this);
-    }
-
-    /**
-     * @return Helpers\Str
-     */
-    protected function buildStr()
-    {
-        return new Helpers\Str($this);
-    }
-
-    /**
-     * @return Helpers\Json
-     */
-    protected function buildJson()
-    {
-        return new Helpers\Json($this);
-    }
-
-    /**
-     * @return Helpers\File
-     */
-    protected function buildFile()
-    {
-        return new Helpers\File($this);
-    }
-
-    /**
-     * @return Helpers\Dir
-     */
-    protected function buildDir()
-    {
-        return new Helpers\Dir($this);
-    }
-
-    /**
-     * @return Helpers\Money
-     */
-    protected function buildMoney()
-    {
-        return new Helpers\Money($this);
-    }
-
-    /**
-     * @return Helpers\Math
-     */
-    protected function buildMath()
-    {
-        return new Helpers\Math($this);
+        return $this->once(function ()
+        {
+            return new Helpers\Math($this);
+        });
     }
 
 }
