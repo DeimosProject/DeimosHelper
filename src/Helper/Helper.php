@@ -37,7 +37,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\Arr($this);
-        });
+        }, __METHOD__);
     }
 
     /**
@@ -48,7 +48,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\Str($this);
-        });
+        }, __METHOD__);
     }
 
     /**
@@ -59,7 +59,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\Json($this);
-        });
+        }, __METHOD__);
     }
 
     /**
@@ -70,7 +70,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\File($this);
-        });
+        }, __METHOD__);
     }
 
     /**
@@ -81,7 +81,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\Dir($this);
-        });
+        }, __METHOD__);
     }
 
     /**
@@ -92,7 +92,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\Money($this);
-        });
+        }, __METHOD__);
     }
 
     /**
@@ -103,7 +103,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\Math($this);
-        });
+        }, __METHOD__);
     }
 
 }
