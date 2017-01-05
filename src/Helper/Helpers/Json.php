@@ -9,8 +9,12 @@ class Json extends AbstractHelper
 
     const OPTIONS_ENCODE = 0;
     const OPTIONS_DECODE = 1;
+
     /**
-     * @var array
+     * first[level]     array      option type
+     * second[level]    array      option value
+     *
+     * @var int[][]
      */
     protected $options = [];
 
@@ -20,28 +24,24 @@ class Json extends AbstractHelper
      */
     public function addOption($value, $target = self::OPTIONS_ENCODE)
     {
-        if (empty($this->options[$target]))
-        {
-
-            $this->options[$target] = [];
-        }
-
-        $this->options[$target][] = $value;
+        $this->helper->arr()->initOrPush($this->options, $target, $value);
     }
 
     /**
-     * @param array|int $options
+     * @param array|int $data
      * @param int       $target
      */
-    public function setOption($options, $target = self::OPTIONS_ENCODE)
+    public function setOption($data, $target = self::OPTIONS_ENCODE)
     {
-        if (!is_array($options))
-        {
+        $this->options[$target] = (array)$data;
+    }
 
-            $options = [$options];
-        }
-
-        $this->options[$target] = $options;
+    /**
+     * reset options
+     */
+    public function reset()
+    {
+        $this->options = [];
     }
 
     /**
@@ -51,7 +51,18 @@ class Json extends AbstractHelper
      */
     public function encode($data)
     {
-        return json_encode($data, $this->options(self::OPTIONS_ENCODE));
+        return json_encode($data, $this->encodeOptions());
+    }
+
+    /**
+     * @param string $data
+     * @param bool   $assoc
+     *
+     * @return mixed
+     */
+    public function decode($data, $assoc = true)
+    {
+        return json_decode($data, $assoc, 512, $this->decodeOptions());
     }
 
     /**
@@ -63,7 +74,7 @@ class Json extends AbstractHelper
     {
         $options = JSON_ERROR_NONE;
 
-        if(isset($this->options[$target]))
+        if (isset($this->options[$target]))
         {
             foreach ($this->options[$target] as $option)
             {
@@ -75,14 +86,19 @@ class Json extends AbstractHelper
     }
 
     /**
-     * @param string $data
-     * @param bool   $assoc
-     *
-     * @return mixed
+     * @return int
      */
-    public function decode($data, $assoc = true)
+    private function encodeOptions()
     {
-        return json_decode($data, $assoc, 512, $this->options(self::OPTIONS_DECODE));
+        return $this->options(self::OPTIONS_ENCODE);
+    }
+
+    /**
+     * @return int
+     */
+    private function decodeOptions()
+    {
+        return $this->options(self::OPTIONS_DECODE);
     }
 
 }

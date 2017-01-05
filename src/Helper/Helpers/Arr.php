@@ -317,4 +317,19 @@ class Arr extends AbstractHelper
         return $this->findPath($storage, $this->keys($key));
     }
 
+    /**
+     * @param array  $storage
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function initOrPush(array &$storage, $key, $value)
+    {
+        if (!empty($storage[$key]))
+        {
+            $storage[$key] = [];
+        }
+
+        $storage[$key][] = $value;
+    }
+
 }
