@@ -3,6 +3,7 @@
 namespace Tests;
 
 use Deimos\Helper\Exceptions\ExceptionEmpty;
+use Deimos\Helper\Helpers\Arr\Arr;
 
 class ArrTest extends \DeimosTest\TestsSetUp
 {
@@ -48,6 +49,10 @@ class ArrTest extends \DeimosTest\TestsSetUp
     public function testKeyExists()
     {
 
+        $this->assertTrue($this->helper->arr()->keyExists(
+            $this->helper->arr()->range(0, 5),
+            3
+        ));
         $this->assertTrue($this->helper->arr()->keyExists($this->array, 0));
         $this->assertTrue($this->helper->arr()->keyExists($this->array, 3));
         $this->assertNotTrue($this->helper->arr()->keyExists($this->array, 99));
@@ -143,7 +148,228 @@ class ArrTest extends \DeimosTest\TestsSetUp
      */
     public function testFindPath()
     {
-        $this->helper->arr()->getRequired($this->array, '');
+
+        $reflection = new \ReflectionMethod(Arr::class, 'findPath');
+        $reflection->setAccessible(true);
+
+        $reflection->invoke($this->helper->arr(), [], []);
+
+    }
+
+    public function testFirstKey()
+    {
+
+        $this->assertEquals(
+            $this->helper->arr()->firstKey($this->array),
+            0
+        );
+
+        $this->assertEquals(
+            $this->helper->arr()->firstKey(['a' => 0, 'w' => 5, 1, 4, 6]),
+            'a'
+        );
+
+        $this->assertNotEquals(
+            $this->helper->arr()->firstKey(['a' => 0, 'w' => 5, 1, 4, 6]),
+            0
+        );
+
+    }
+
+    public function testLastKey()
+    {
+
+        $this->assertEquals(
+            $this->helper->arr()->lastKey($this->array),
+            6
+        );
+
+        $this->assertEquals(
+            $this->helper->arr()->lastKey(['a' => 0, 1, 4, 6, 'w' => 5]),
+            'w'
+        );
+
+        $this->assertNotEquals(
+            $this->helper->arr()->lastKey(['a' => 0, 'w' => 5, 1, 4, 6]),
+            0
+        );
+
+    }
+
+    public function testAt()
+    {
+
+        $this->assertEquals(
+            $this->helper->arr()->at($this->array, 2),
+            3
+        );
+
+    }
+
+    public function testOddKey()
+    {
+
+        $array = $this->helper->arr()->oddKey($this->helper->arr()->range(0, 10));
+
+        $this->assertEquals(
+            $array,
+            $this->helper->arr()->range(1, 10, 2),
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+        $this->assertNotEquals(
+            $array,
+            $this->helper->arr()->range(0, 10, 2),
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testEvenKey()
+    {
+
+        $array = $this->helper->arr()->evenKey($this->helper->arr()->range(0, 10));
+
+        $this->assertEquals(
+            $array,
+            $this->helper->arr()->range(0, 10, 2),
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+        $this->assertNotEquals(
+            $array,
+            $this->helper->arr()->range(1, 10, 2),
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testPush()
+    {
+
+        $array = [1];
+
+        $index = $this->helper->arr()->push($array, 2);
+
+        $this->assertCount($index, $array);
+
+        $this->assertEquals(
+            $array,
+            [1, 2],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testPop()
+    {
+
+        $array = [1, 2];
+
+        $index = $this->helper->arr()->pop($array);
+
+        $this->assertEquals(
+            $index,
+            2
+        );
+
+        $this->assertEquals(
+            $array,
+            [1],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testUnShift()
+    {
+
+        $array = [1];
+
+        $index = $this->helper->arr()->unShift($array, 2);
+
+        $this->assertCount($index, $array);
+
+        $this->assertEquals(
+            $array,
+            [2, 1],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testShift()
+    {
+
+        $array = [1, 2];
+
+        $index = $this->helper->arr()->shift($array);
+
+        $this->assertEquals(
+            $index,
+            1
+        );
+
+        $this->assertEquals(
+            $array,
+            [2],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testFirst()
+    {
+
+        next($this->array);
+
+        $this->assertEquals(
+            $this->helper->arr()->first($this->array),
+            1
+        );
+
+        $this->assertEquals(
+            current($this->array),
+            2
+        );
+
+        $this->assertEquals(
+            $this->helper->arr()->firstKey($this->array),
+            0
+        );
+
+        $this->assertEquals(
+            current($this->array),
+            2
+        );
+
+    }
+
+    public function testLast()
+    {
+
+        next($this->array);
+
+        $this->assertEquals(
+            $this->helper->arr()->last($this->array),
+            9
+        );
+
+        $this->assertEquals(
+            current($this->array),
+            2
+        );
+
+        $this->assertEquals(
+            $this->helper->arr()->lastKey($this->array),
+            6 // last INT key
+        );
+
+        $this->assertEquals(
+            current($this->array),
+            2
+        );
+
     }
 
 }

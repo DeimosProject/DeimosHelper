@@ -41,26 +41,30 @@ trait KeyTrait
     }
 
     /**
+     * 0=>'', 2=> ''...
+     *
      * @param array $storage
      *
      * @return array
      */
     public function oddKey(array $storage)
     {
-        return $this->filter($storage, function (&$value, &$key)
+        return $this->filter($storage, function ($value, $key)
         {
             return $this->helper->math()->isOdd($key);
         });
     }
 
     /**
+     * 1=>'', 3=>''...
+     *
      * @param array $storage
      *
      * @return array
      */
     public function evenKey(array $storage)
     {
-        return $this->filter($storage, function (&$value, &$key)
+        return $this->filter($storage, function ($value, $key)
         {
             return $this->helper->math()->isEven($key);
         });
@@ -72,7 +76,7 @@ trait KeyTrait
      *
      * @return bool
      */
-    public function keyExists(array &$storage, $key)
+    public function keyExists(array $storage, $key)
     {
         return isset($storage[$key]) || array_key_exists($key, $storage);
     }

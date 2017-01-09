@@ -39,6 +39,8 @@ class Math extends AbstractHelper
     }
 
     /**
+     * 1, 3, 5...
+     *
      * @param int $argument
      *
      * @return bool
@@ -49,6 +51,8 @@ class Math extends AbstractHelper
     }
 
     /**
+     * 0, 2, 4...
+     *
      * @param int $argument
      *
      * @return bool

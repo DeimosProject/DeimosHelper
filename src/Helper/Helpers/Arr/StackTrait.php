@@ -72,6 +72,8 @@ trait StackTrait
     }
 
     /**
+     * 1, 3, 5...
+     *
      * @param array $storage
      *
      * @return array
@@ -85,6 +87,8 @@ trait StackTrait
     }
 
     /**
+     * 0, 2, 4...
+     *
      * @param array $storage
      *
      * @return array
