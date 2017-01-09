@@ -27,4 +27,14 @@ class Dir extends AbstractHelper
         return is_dir($path);
     }
 
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function remove($path)
+    {
+        return rmdir($path);
+    }
+
 }
