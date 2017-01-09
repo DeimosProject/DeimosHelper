@@ -372,4 +372,26 @@ class ArrTest extends \DeimosTest\TestsSetUp
 
     }
 
+    public function testOdd()
+    {
+
+        $this->assertEquals(
+            $this->helper->arr()->odd([1, 2, 3, 4]),
+            [1, 3],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testEven()
+    {
+
+        $this->assertEquals(
+            $this->helper->arr()->even([1, 2, 3, 4]),
+            [2, 4],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
 }

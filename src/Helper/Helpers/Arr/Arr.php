@@ -30,7 +30,19 @@ class Arr extends AbstractHelper
      */
     public function filter(array $storage, callable $callback)
     {
-        return array_filter($storage, $callback, ARRAY_FILTER_USE_BOTH);
+        $flag = 1;
+
+        if (defined('ARRAY_FILTER_USE_BOTH'))
+        {
+
+            $flag = ARRAY_FILTER_USE_BOTH;
+        }
+        else if (defined('FILTER_USE_BOTH'))
+        {
+            $flag = FILTER_USE_BOTH;
+        }
+
+        return array_filter($storage, $callback, $flag);
     }
 
     /**
@@ -48,7 +60,7 @@ class Arr extends AbstractHelper
     /**
      * @param mixed $begin
      * @param mixed $end
-     * @param int $step
+     * @param int   $step
      *
      * @return array
      */
