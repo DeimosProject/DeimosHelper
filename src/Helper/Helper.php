@@ -30,13 +30,13 @@ class Helper extends Builder
     }
 
     /**
-     * @return Helpers\Arr
+     * @return Helpers\Arr\Arr
      */
     public function arr()
     {
         return $this->once(function ()
         {
-            return new Helpers\Arr($this);
+            return new Helpers\Arr\Arr($this);
         }, __METHOD__);
     }
 
