@@ -41,13 +41,13 @@ class Helper extends Builder
     }
 
     /**
-     * @return Helpers\Str
+     * @return Helpers\Str\Str
      */
     public function str()
     {
         return $this->once(function ()
         {
-            return new Helpers\Str($this);
+            return new Helpers\Str\Str($this);
         }, __METHOD__);
     }
 
