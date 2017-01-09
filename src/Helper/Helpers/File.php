@@ -8,7 +8,27 @@ class File extends AbstractHelper
 {
 
     /**
-     * @param $path
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function touch($path)
+    {
+        return touch($path);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function remove($path)
+    {
+        return unlink($path);
+    }
+
+    /**
+     * @param string $path
      *
      * @return bool
      */
@@ -18,7 +38,7 @@ class File extends AbstractHelper
     }
 
     /**
-     * @param $path
+     * @param string $path
      *
      * @return int
      */
@@ -32,7 +52,7 @@ class File extends AbstractHelper
      *
      * @return bool
      */
-    public function readable($path)
+    public function isReadable($path)
     {
         return is_readable($path);
     }
