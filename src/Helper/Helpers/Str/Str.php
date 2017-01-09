@@ -15,8 +15,6 @@ class Str extends AbstractHelper
     const RAND_ALPHA     = 1;
     const RAND_NUM       = 2;
     const RAND_ALPHA_NUM = self::RAND_ALPHA + self::RAND_NUM;
-    const RAND_MD5       = 30;
-    const RAND_SHA1      = 31;
 
     /**
      * Shortens text to length and keeps integrity of words
@@ -92,19 +90,19 @@ class Str extends AbstractHelper
                 $pool = self::DIGITS;
                 break;
 
-            case self::RAND_MD5:
-                return md5(uniqid(mt_rand(), true));
-                break;
-
-            case self::RAND_SHA1:
-                return sha1(uniqid(mt_rand(), true));
-                break;
-
             default:
                 throw new \InvalidArgumentException("Invalid random string type [{$type}].");
         }
 
         return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
+
+    /**
+     * @return string
+     */
+    public function uniqid()
+    {
+        return uniqid(mt_rand(), true);
     }
 
     /**

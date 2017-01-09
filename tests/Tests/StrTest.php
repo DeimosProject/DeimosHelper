@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Deimos\Helper\Exceptions\ExceptionEmpty;
+use Deimos\Helper\Helpers\Str\Str;
 
 class StrTest extends \DeimosTest\TestsSetUp
 {
@@ -86,6 +86,149 @@ class StrTest extends \DeimosTest\TestsSetUp
         }
 
         $this->assertEquals($this->helper->str()->transliteration($sourceStr), $resultStr);
+    }
+
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testRandomException()
+    {
+        $this->helper->str()->random(32, '123');
+    }
+
+    public function testRandom()
+    {
+
+        $str = $this->helper->str()->random(32, Str::RAND_ALPHA);
+        $strNum = $this->helper->str()->random(32, Str::RAND_ALPHA_NUM);
+        $num = $this->helper->str()->random(32, Str::RAND_NUM);
+
+        $this->assertRegExp('/[a-zA-Z]+/', $str);
+        $this->assertRegExp('/[a-zA-Z0-9]+/', $strNum);
+        $this->assertRegExp('/[0-9]+/', $num);
+
+    }
+
+    public function testUniqueId()
+    {
+        $this->assertRegExp('/[a-z0-9]+/', $this->helper->str()->uniqid());
+    }
+
+    public function testFileSize()
+    {
+        $size = 500;
+        $this->assertEquals(
+            $size . ' B',
+            $this->helper->str()->fileSize($size)
+        );
+        $size = 50000;
+        $this->assertEquals(
+            round($size/1024, 2) . ' KB',
+            $this->helper->str()->fileSize($size)
+        );
+        $size = 50000000;
+        $this->assertEquals(
+            round($size/1024/1024, 2) . ' MB',
+            $this->helper->str()->fileSize($size)
+        );
+        $size = 500000000000;
+        $this->assertEquals(
+            round($size/1024/1024/1024, 2) . ' GB',
+            $this->helper->str()->fileSize($size)
+        );
+        $size = 500000000000000;
+        $this->assertEquals(
+            round($size/1024/1024/1024/1024, 2) . ' TB',
+            $this->helper->str()->fileSize($size)
+        );
+        $size = 500000000000000000;
+        $this->assertEquals(
+            round($size/1024/1024/1024/1024/1024, 2) . ' PB',
+            $this->helper->str()->fileSize($size)
+        );
+    }
+
+    public function testCapitalize()
+    {
+        $str1 = 'All Their Equipment And Instruments Are';
+        $str2 = 'В Вечернем Свете Волны Oтчаянно Бились';
+
+        $this->assertEquals(
+            $str1,
+            $this->helper->str()->capitalize(
+                mb_strtolower($str1)
+            )
+        );
+
+        $this->assertEquals(
+            $str2,
+            $this->helper->str()->capitalize(
+                mb_strtolower($str2)
+            )
+        );
+
+    }
+
+    public function testLen()
+    {
+        $str1 = 'All their equipment and instruments are';
+        $str2 = 'В вечернем свете волны отчаянно бились';
+
+        $this->assertEquals(
+            mb_strlen($str1),
+            $this->helper->str()->len($str1)
+        );
+
+        $this->assertEquals(
+            mb_strlen($str2),
+            $this->helper->str()->len($str2)
+        );
+
+    }
+
+    public function testPos()
+    {
+        $str1 = 'All their equipment and instruments are';
+        $str2 = 'В вечернем свете волны отчаянно бились';
+
+        $this->assertEquals(
+            3,
+            $this->helper->str()->pos($str1, ' ')
+        );
+
+        $this->assertEquals(
+            1,
+            $this->helper->str()->pos($str2, ' ')
+        );
+
+    }
+
+    public function testRepeat()
+    {
+        $this->assertRegExp(
+            '/[b]{8}/',
+            $this->helper->str()->repeat('b', 8)
+        );
+        $this->assertRegExp(
+            '/[b]{16}/',
+            $this->helper->str()->repeat('bb', 8)
+        );
+    }
+
+    public function testShuffle()
+    {
+        $str1 = 'All their equipment and instruments are';
+        $str2 = 'В вечернем свете волны отчаянно бились';
+
+        $this->assertNotEquals(
+            $str1,
+            $this->helper->str()->shuffle($str1)
+        );
+        $this->assertNotEquals(
+            $str2,
+            $this->helper->str()->shuffle($str2)
+        );
     }
 
 }
