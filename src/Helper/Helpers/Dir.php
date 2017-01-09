@@ -14,12 +14,7 @@ class Dir extends AbstractHelper
      */
     public function make($path)
     {
-        if (!@mkdir($path, 0777, true) && !is_dir($path))
-        {
-            return false;
-        }
-
-        return true;
+        return !(!@mkdir($path, 0777, true) && !is_dir($path));
     }
 
     /**
