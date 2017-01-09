@@ -292,7 +292,7 @@ class Arr extends AbstractHelper
      */
     public function keyExists(array &$storage, $key)
     {
-        return array_key_exists($key, $storage);
+        return isset($storage[$key]) || array_key_exists($key, $storage);
     }
 
     /**
