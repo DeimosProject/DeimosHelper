@@ -48,12 +48,13 @@ class Arr extends AbstractHelper
     /**
      * @param mixed $begin
      * @param mixed $end
+     * @param int $step
      *
      * @return mixed
      */
-    public function range($begin, $end)
+    public function range($begin, $end, $step = 1)
     {
-        return $this->range($begin, $end);
+        return range($begin, $end, $step);
     }
 
     /**

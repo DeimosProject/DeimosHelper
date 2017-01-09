@@ -8,7 +8,7 @@
     }
   ],
   "require": {
-    "deimos/builder": "^0.0",
+    "deimos/builder": "~0.0",
     "ext-mbstring": "*"
   },
   "require-dev": {

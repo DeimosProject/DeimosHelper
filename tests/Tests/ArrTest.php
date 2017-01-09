@@ -64,7 +64,7 @@ class ArrTest extends \DeimosTest\TestsSetUp
         $this->assertEquals($this->helper->arr()->get($this->array, 3, 'c'), 4);
         $this->assertNull($this->helper->arr()->get($this->array, 'c', null));
     }
-    
+
     public function testGetRequired()
     {
 
@@ -82,6 +82,68 @@ class ArrTest extends \DeimosTest\TestsSetUp
         catch (ExceptionEmpty $e)
         {
         }
+    }
+
+    public function testFill()
+    {
+
+        $array = $this->helper->arr()->fill('a', 3);
+
+        $this->assertEquals(
+            $array,
+            ['a','a','a',],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    public function testRange()
+    {
+
+        $this->assertEquals(
+            $this->helper->arr()->range(0,2),
+            [0,1,2],
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+    }
+
+    public function testInStrict()
+    {
+
+        $result = $this->helper->arr()->inStrict($this->array, '1');
+
+        $this->assertNotEquals($this->array[1], $result);
+
+    }
+
+    public function testIn()
+    {
+
+        $result = $this->helper->arr()->in($this->array, '1');
+
+        $this->assertEquals($this->array[1], $result);
+
+    }
+
+    public function testShuffle()
+    {
+
+        $array = $this->helper->arr()->range(0, 999);
+        $this->assertNotEquals(
+            $array,
+            $this->helper->arr()->shuffle($array),
+            '', $delta = 0.0, $maxDepth = 10, true
+        );
+
+    }
+
+    /**
+     * @expectedException \Deimos\Helper\Exceptions\ExceptionEmpty
+     * @throws ExceptionEmpty
+     */
+    public function testFindPath()
+    {
+        $this->helper->arr()->getRequired($this->array, '');
     }
 
 }
