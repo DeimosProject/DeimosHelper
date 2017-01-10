@@ -127,7 +127,7 @@ trait StackTrait
      */
     public function initOrPush(array &$storage, $key, $value)
     {
-        if (!empty($storage[$key]))
+        if (empty($storage[$key]))
         {
             $storage[$key] = [];
         }

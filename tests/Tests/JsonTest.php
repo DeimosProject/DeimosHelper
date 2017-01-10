@@ -8,23 +8,31 @@ class JsonTest extends \DeimosTest\TestsSetUp
     protected $array = [
         1, 2, 3,
         4, 5, 6,
-        7, 8, 9
+        'a' => 7, 8, 9,
+        'Бесплатно'
     ];
 
     public function testOptions()
     {
 
+        $this->helper->json()->reset();
         $this->helper->json()->addOption(JSON_PRETTY_PRINT);
         $resultString = $this->helper->json()->encode($this->array);
-        $this->assertJsonStringEqualsJsonString(json_encode($this->array, JSON_PRETTY_PRINT), $resultString);
+        $this->assertEquals(json_encode($this->array, JSON_PRETTY_PRINT), $resultString);
 
         $this->helper->json()->addOption(JSON_FORCE_OBJECT);
         $resultString = $this->helper->json()->encode($this->array);
-        $this->assertJsonStringEqualsJsonString(json_encode($this->array, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT), $resultString);
+        $this->assertEquals(json_encode($this->array, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT), $resultString);
+
+        $this->helper->json()->reset();
+        $this->helper->json()->addOption(JSON_PRETTY_PRINT);
+        $this->helper->json()->addOption(JSON_UNESCAPED_UNICODE);
+        $resultString = $this->helper->json()->encode($this->array);
+        $this->assertEquals(json_encode($this->array, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), $resultString);
 
         $this->helper->json()->setOption(JSON_ERROR_NONE);
         $resultString = $this->helper->json()->encode($this->array);
-        $this->assertJsonStringEqualsJsonString(json_encode($this->array), $resultString);
+        $this->assertEquals(json_encode($this->array), $resultString);
 
     }
 
