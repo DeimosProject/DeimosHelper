@@ -34,6 +34,12 @@ class JsonTest extends \DeimosTest\TestsSetUp
         $resultString = $this->helper->json()->encode($this->array);
         $this->assertEquals(json_encode($this->array), $resultString);
 
+        $this->assertEquals(
+            $this->array,
+            $this->helper->json()->decode(json_encode($this->array)),
+            '', 0.0, 10, true
+        );
+
     }
 
 }
