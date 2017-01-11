@@ -32,7 +32,16 @@ class Arr extends AbstractHelper
     {
         if (defined('HHVM_VERSION'))
         {
-            return array_filter($storage, $callback);
+            $array = [];
+            foreach ($storage as $key => $value)
+            {
+                if ($callback($value, $key))
+                {
+                    $array[$key] = $value;
+                }
+            }
+
+            return $array;
         }
 
         return array_filter($storage, $callback, ARRAY_FILTER_USE_BOTH);
