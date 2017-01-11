@@ -4,17 +4,17 @@ namespace Tests;
 
 use Deimos\Helper\Helpers\Str\Str;
 
-class StrTest extends \DeimosTest\TestsSetUp
+class StrTest extends \DeimosTest\TestSetUp
 {
 
     public function testShorter()
     {
         $length = strlen('All their equipment and instruments are');
-        $string = $this->helper->str()->shorten('All their equipment and instruments are alive', $length, 0);
+        $string = $this->helper()->str()->shorten('All their equipment and instruments are alive', $length, 0);
         $this->assertEquals($string, 'All their equipment and instruments 0');
 
         $length = strlen('В вечернем свете волны отчаянно бились');
-        $string = $this->helper->str()->shorten('В вечернем свете волны отчаянно бились о берег', $length, 0);
+        $string = $this->helper()->str()->shorten('В вечернем свете волны отчаянно бились о берег', $length, 0);
         $this->assertEquals($string, 'В вечернем свете волны отчаянно 0');
     }
 
@@ -22,21 +22,21 @@ class StrTest extends \DeimosTest\TestsSetUp
     {
         $string = 'i Watched the Storm, so beautiful yet terrific';
 
-        $this->assertEquals(ucfirst($string), $this->helper->str()->ucFirst($string));
+        $this->assertEquals(ucfirst($string), $this->helper()->str()->ucFirst($string));
     }
 
     public function testLcFirst()
     {
         $string = 'I Watched the Storm, so beautiful yet terrific';
 
-        $this->assertEquals(lcfirst($string), $this->helper->str()->lcFirst($string));
+        $this->assertEquals(lcfirst($string), $this->helper()->str()->lcFirst($string));
     }
 
     public function testToNumber()
     {
         $str = 'd2d5f0g-+@!HFV3445';
 
-        $this->assertEquals($this->helper->str()->toNumber($str), '2503445');
+        $this->assertEquals($this->helper()->str()->toNumber($str), '2503445');
     }
 
     public function testTransliteration()
@@ -77,7 +77,7 @@ class StrTest extends \DeimosTest\TestsSetUp
             $resultStr .= $value;
         }
 
-        $this->assertEquals($this->helper->str()->translit($sourceStr), $resultStr);
+        $this->assertEquals($this->helper()->str()->translit($sourceStr), $resultStr);
 
         foreach (array_reverse($arr) as $key => $value)
         {
@@ -85,7 +85,7 @@ class StrTest extends \DeimosTest\TestsSetUp
             $resultStr .= $value;
         }
 
-        $this->assertEquals($this->helper->str()->translit($sourceStr), $resultStr);
+        $this->assertEquals($this->helper()->str()->translit($sourceStr), $resultStr);
     }
 
 
@@ -94,14 +94,14 @@ class StrTest extends \DeimosTest\TestsSetUp
      */
     public function testRandomException()
     {
-        $this->helper->str()->random(32, 0);
+        $this->helper()->str()->random(32, 0);
     }
 
     public function testRandom()
     {
-        $str    = $this->helper->str()->random(64, Str::RAND_ALPHA);
-        $strNum = $this->helper->str()->random(64, Str::RAND_ALL);
-        $num    = $this->helper->str()->random(64, Str::RAND_DIGITS);
+        $str    = $this->helper()->str()->random(64, Str::RAND_ALPHA);
+        $strNum = $this->helper()->str()->random(64, Str::RAND_ALL);
+        $num    = $this->helper()->str()->random(64, Str::RAND_DIGITS);
 
         $this->assertRegExp('/[a-z]+/', $str);
         $this->assertRegExp('/[A-Z]+/', $str);
@@ -110,7 +110,7 @@ class StrTest extends \DeimosTest\TestsSetUp
         $this->assertRegExp('/[A-Z]+/', $strNum);
         $this->assertRegExp('/[0-9]+/', $strNum);
 
-        $strNum = $this->helper->str()->random(64, Str::RAND_ALPHA_LOW | Str::RAND_DIGITS);
+        $strNum = $this->helper()->str()->random(64, Str::RAND_ALPHA_LOW | Str::RAND_DIGITS);
 
         $this->assertRegExp('/[a-z]+/', $strNum);
         $this->assertRegExp('/[^A-Z]+/', $strNum);
@@ -121,7 +121,7 @@ class StrTest extends \DeimosTest\TestsSetUp
 
     public function testUniqueId()
     {
-        $this->assertRegExp('/[a-z0-9]+/', $this->helper->str()->uniqid());
+        $this->assertRegExp('/[a-z0-9]+/', $this->helper()->str()->uniqid());
     }
 
     public function testFileSize()
@@ -129,32 +129,32 @@ class StrTest extends \DeimosTest\TestsSetUp
         $size = 500;
         $this->assertEquals(
             $size . ' B',
-            $this->helper->str()->fileSize($size)
+            $this->helper()->str()->fileSize($size)
         );
         $size = 50000;
         $this->assertEquals(
             round($size / 1024, 2) . ' KB',
-            $this->helper->str()->fileSize($size)
+            $this->helper()->str()->fileSize($size)
         );
         $size = 50000000;
         $this->assertEquals(
             round($size / 1024 / 1024, 2) . ' MB',
-            $this->helper->str()->fileSize($size)
+            $this->helper()->str()->fileSize($size)
         );
         $size = 500000000000;
         $this->assertEquals(
             round($size / 1024 / 1024 / 1024, 2) . ' GB',
-            $this->helper->str()->fileSize($size)
+            $this->helper()->str()->fileSize($size)
         );
         $size = 500000000000000;
         $this->assertEquals(
             round($size / 1024 / 1024 / 1024 / 1024, 2) . ' TB',
-            $this->helper->str()->fileSize($size)
+            $this->helper()->str()->fileSize($size)
         );
         $size = 500000000000000000;
         $this->assertEquals(
             round($size / 1024 / 1024 / 1024 / 1024 / 1024, 2) . ' PB',
-            $this->helper->str()->fileSize($size)
+            $this->helper()->str()->fileSize($size)
         );
     }
 
@@ -165,14 +165,14 @@ class StrTest extends \DeimosTest\TestsSetUp
 
         $this->assertEquals(
             $str1,
-            $this->helper->str()->capitalize(
+            $this->helper()->str()->capitalize(
                 mb_strtolower($str1)
             )
         );
 
         $this->assertEquals(
             $str2,
-            $this->helper->str()->capitalize(
+            $this->helper()->str()->capitalize(
                 mb_strtolower($str2)
             )
         );
@@ -186,12 +186,12 @@ class StrTest extends \DeimosTest\TestsSetUp
 
         $this->assertEquals(
             mb_strlen($str1),
-            $this->helper->str()->len($str1)
+            $this->helper()->str()->len($str1)
         );
 
         $this->assertEquals(
             mb_strlen($str2),
-            $this->helper->str()->len($str2)
+            $this->helper()->str()->len($str2)
         );
 
     }
@@ -203,12 +203,12 @@ class StrTest extends \DeimosTest\TestsSetUp
 
         $this->assertEquals(
             3,
-            $this->helper->str()->pos($str1, ' ')
+            $this->helper()->str()->pos($str1, ' ')
         );
 
         $this->assertEquals(
             1,
-            $this->helper->str()->pos($str2, ' ')
+            $this->helper()->str()->pos($str2, ' ')
         );
 
     }
@@ -217,11 +217,11 @@ class StrTest extends \DeimosTest\TestsSetUp
     {
         $this->assertRegExp(
             '/[b]{8}/',
-            $this->helper->str()->repeat('b', 8)
+            $this->helper()->str()->repeat('b', 8)
         );
         $this->assertRegExp(
             '/[b]{16}/',
-            $this->helper->str()->repeat('bb', 8)
+            $this->helper()->str()->repeat('bb', 8)
         );
     }
 
@@ -232,11 +232,11 @@ class StrTest extends \DeimosTest\TestsSetUp
 
         $this->assertNotEquals(
             $str1,
-            $this->helper->str()->shuffle($str1)
+            $this->helper()->str()->shuffle($str1)
         );
         $this->assertNotEquals(
             $str2,
-            $this->helper->str()->shuffle($str2)
+            $this->helper()->str()->shuffle($str2)
         );
     }
 

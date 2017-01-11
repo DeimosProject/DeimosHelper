@@ -4,7 +4,7 @@ namespace Tests;
 
 use Deimos\Helper\Helper;
 
-class InitTest extends \DeimosTest\TestsSetUp
+class InitTest extends \DeimosTest\TestSetUp
 {
 
     /**
@@ -13,7 +13,7 @@ class InitTest extends \DeimosTest\TestsSetUp
      */
     public function testException()
     {
-        new Helper($this->helper);
+        new Helper($this->helper());
     }
 
 }

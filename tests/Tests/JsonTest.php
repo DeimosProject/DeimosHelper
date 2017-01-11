@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-class JsonTest extends \DeimosTest\TestsSetUp
+class JsonTest extends \DeimosTest\TestSetUp
 {
 
     protected $array = [
@@ -15,28 +15,28 @@ class JsonTest extends \DeimosTest\TestsSetUp
     public function testOptions()
     {
 
-        $this->helper->json()->reset();
-        $this->helper->json()->addOption(JSON_PRETTY_PRINT);
-        $resultString = $this->helper->json()->encode($this->array);
+        $this->helper()->json()->reset();
+        $this->helper()->json()->addOption(JSON_PRETTY_PRINT);
+        $resultString = $this->helper()->json()->encode($this->array);
         $this->assertEquals(json_encode($this->array, JSON_PRETTY_PRINT), $resultString);
 
-        $this->helper->json()->addOption(JSON_FORCE_OBJECT);
-        $resultString = $this->helper->json()->encode($this->array);
+        $this->helper()->json()->addOption(JSON_FORCE_OBJECT);
+        $resultString = $this->helper()->json()->encode($this->array);
         $this->assertEquals(json_encode($this->array, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT), $resultString);
 
-        $this->helper->json()->reset();
-        $this->helper->json()->addOption(JSON_PRETTY_PRINT);
-        $this->helper->json()->addOption(JSON_UNESCAPED_UNICODE);
-        $resultString = $this->helper->json()->encode($this->array);
+        $this->helper()->json()->reset();
+        $this->helper()->json()->addOption(JSON_PRETTY_PRINT);
+        $this->helper()->json()->addOption(JSON_UNESCAPED_UNICODE);
+        $resultString = $this->helper()->json()->encode($this->array);
         $this->assertEquals(json_encode($this->array, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), $resultString);
 
-        $this->helper->json()->setOption(JSON_ERROR_NONE);
-        $resultString = $this->helper->json()->encode($this->array);
+        $this->helper()->json()->setOption(JSON_ERROR_NONE);
+        $resultString = $this->helper()->json()->encode($this->array);
         $this->assertEquals(json_encode($this->array), $resultString);
 
         $this->assertEquals(
             $this->array,
-            $this->helper->json()->decode(json_encode($this->array)),
+            $this->helper()->json()->decode(json_encode($this->array)),
             '', 0.0, 10, true
         );
 
