@@ -77,7 +77,7 @@ class StrTest extends \DeimosTest\TestsSetUp
             $resultStr .= $value;
         }
 
-        $this->assertEquals($this->helper->str()->transliteration($sourceStr), $resultStr);
+        $this->assertEquals($this->helper->str()->translit($sourceStr), $resultStr);
 
         foreach (array_reverse($arr) as $key => $value)
         {
@@ -85,7 +85,7 @@ class StrTest extends \DeimosTest\TestsSetUp
             $resultStr .= $value;
         }
 
-        $this->assertEquals($this->helper->str()->transliteration($sourceStr), $resultStr);
+        $this->assertEquals($this->helper->str()->translit($sourceStr), $resultStr);
     }
 
 
@@ -94,20 +94,29 @@ class StrTest extends \DeimosTest\TestsSetUp
      */
     public function testRandomException()
     {
-        $this->helper->str()->random(32, '123');
+        $this->helper->str()->random(32, 0);
     }
 
     public function testRandom()
     {
+        $str    = $this->helper->str()->random(64, Str::RAND_ALPHA);
+        $strNum = $this->helper->str()->random(64, Str::RAND_ALL);
+        $num    = $this->helper->str()->random(64, Str::RAND_DIGITS);
 
-        $str = $this->helper->str()->random(32, Str::RAND_ALPHA);
-        $strNum = $this->helper->str()->random(32, Str::RAND_ALPHA_NUM);
-        $num = $this->helper->str()->random(32, Str::RAND_NUM);
+        $this->assertRegExp('/[a-z]+/', $str);
+        $this->assertRegExp('/[A-Z]+/', $str);
 
-        $this->assertRegExp('/[a-zA-Z]+/', $str);
-        $this->assertRegExp('/[a-zA-Z0-9]+/', $strNum);
+        $this->assertRegExp('/[a-z]+/', $strNum);
+        $this->assertRegExp('/[A-Z]+/', $strNum);
+        $this->assertRegExp('/[0-9]+/', $strNum);
+
+        $strNum = $this->helper->str()->random(64, Str::RAND_ALPHA_LOW | Str::RAND_DIGITS);
+
+        $this->assertRegExp('/[a-z]+/', $strNum);
+        $this->assertRegExp('/[^A-Z]+/', $strNum);
+        $this->assertRegExp('/[0-9]+/', $strNum);
+
         $this->assertRegExp('/[0-9]+/', $num);
-
     }
 
     public function testUniqueId()
@@ -124,27 +133,27 @@ class StrTest extends \DeimosTest\TestsSetUp
         );
         $size = 50000;
         $this->assertEquals(
-            round($size/1024, 2) . ' KB',
+            round($size / 1024, 2) . ' KB',
             $this->helper->str()->fileSize($size)
         );
         $size = 50000000;
         $this->assertEquals(
-            round($size/1024/1024, 2) . ' MB',
+            round($size / 1024 / 1024, 2) . ' MB',
             $this->helper->str()->fileSize($size)
         );
         $size = 500000000000;
         $this->assertEquals(
-            round($size/1024/1024/1024, 2) . ' GB',
+            round($size / 1024 / 1024 / 1024, 2) . ' GB',
             $this->helper->str()->fileSize($size)
         );
         $size = 500000000000000;
         $this->assertEquals(
-            round($size/1024/1024/1024/1024, 2) . ' TB',
+            round($size / 1024 / 1024 / 1024 / 1024, 2) . ' TB',
             $this->helper->str()->fileSize($size)
         );
         $size = 500000000000000000;
         $this->assertEquals(
-            round($size/1024/1024/1024/1024/1024, 2) . ' PB',
+            round($size / 1024 / 1024 / 1024 / 1024 / 1024, 2) . ' PB',
             $this->helper->str()->fileSize($size)
         );
     }

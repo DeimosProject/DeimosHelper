@@ -9,12 +9,27 @@ class Str extends AbstractHelper
 
     use DefaultTrait;
 
-    const DIGITS   = '0123456789';
-    const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const DIGITS        = '0123456789';
+    const ALPHABET_LOW  = 'abcdefghijklmnopqrstuvwxyz';
+    const ALPHABET_HIGH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const ALPHABET      = self::ALPHABET_LOW . self::ALPHABET_HIGH;
 
-    const RAND_ALPHA     = 1;
-    const RAND_NUM       = 2;
-    const RAND_ALPHA_NUM = self::RAND_ALPHA + self::RAND_NUM;
+    const RAND_ALPHA_LOW  = 1;
+    const RAND_ALPHA_HIGH = 2;
+    const RAND_ALPHA      = 4;
+    const RAND_DIGITS     = 8;
+    const RAND_ALL        = 16;
+
+    /**
+     * @var array
+     */
+    protected $dictionary = [
+        4 => self::ALPHABET . self::DIGITS,
+        3 => self::DIGITS,
+        2 => self::ALPHABET,
+        1 => self::ALPHABET_HIGH,
+        0 => self::ALPHABET_LOW,
+    ];
 
     /**
      * Shortens text to length and keeps integrity of words
@@ -74,27 +89,46 @@ class Str extends AbstractHelper
      *
      * @throws \InvalidArgumentException
      */
-    public function random($length = 32, $type = self::RAND_ALPHA_NUM)
+    public function random($length = 32, $type = self::RAND_ALL)
     {
-        switch ($type)
+        $string = '';
+
+        // todo: make to halper?
+        foreach ($this->dictionary as $pos => $item)
         {
-            case self::RAND_ALPHA:
-                $pool = self::ALPHABET;
-                break;
-
-            case self::RAND_ALPHA_NUM:
-                $pool = self::DIGITS . self::ALPHABET;
-                break;
-
-            case self::RAND_NUM:
-                $pool = self::DIGITS;
-                break;
-
-            default:
-                throw new \InvalidArgumentException("Invalid random string type [{$type}].");
+            $key = (1 << $pos);
+            if ($type >= $key)
+            {
+                $string .= $item;
+                $type -= $key;
+            }
         }
 
-        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+        if (empty($string))
+        {
+            throw new \InvalidArgumentException("Invalid random string type [{$type}].");
+        }
+
+        return $this->rand($string, $length);
+    }
+
+    /**
+     * @param string $chars
+     * @param int    $length
+     *
+     * @return string
+     */
+    protected function rand($chars, $length)
+    {
+        $string = '';
+        $max    = $this->len($chars);
+
+        for ($i = 0; $i < $length; $i++)
+        {
+            $string .= $chars[random_int(0, $max)];
+        }
+
+        return $string;
     }
 
     /**
@@ -150,14 +184,13 @@ class Str extends AbstractHelper
     /**
      * transliteration cyr->lat
      *
-     * @param $str
+     * @param $string
      *
      * @return string
      */
-    public function transliteration($str)
+    public function translit($string)
     {
-
-        return strtr($str, [
+        $string = strtr($string, [
                 'ОАО '  => 'OJSC ',
                 'ЗАО '  => 'CJSC ',
                 'ООО '  => 'LLC ',
@@ -184,6 +217,8 @@ class Str extends AbstractHelper
                 '№' => 'N',
             ]
         );
+
+        return iconv(mb_internal_encoding(), 'ASCII//TRANSLIT', $string);
     }
 
 }

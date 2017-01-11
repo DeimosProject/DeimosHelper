@@ -97,7 +97,7 @@ trait DefaultTrait
      */
     public function shuffle($string)
     {
-        return str_shuffle($string);
+        return $this->rand($string, $this->len($string));
     }
 
 }
