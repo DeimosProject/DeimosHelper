@@ -17,7 +17,7 @@ class Arr extends AbstractHelper
      *
      * @return array
      */
-    public function map(array $storage, callable $callback)
+    public function map(array $storage, $callback)
     {
         return array_map($callback, $storage);
     }
@@ -28,11 +28,15 @@ class Arr extends AbstractHelper
      *
      * @return array
      */
-    public function filter(array $storage, callable $callback)
+    public function filter(array $storage, $callback)
     {
-        if (defined('HHVM_VERSION'))
+        try
         {
-            $array = []; // fixme : hhvm please
+            return array_filter($storage, $callback, ARRAY_FILTER_USE_BOTH);
+        }
+        catch (\Exception $exception)
+        {
+            $array = [];
             foreach ($storage as $key => $value)
             {
                 if ($callback($value, $key))
@@ -43,8 +47,6 @@ class Arr extends AbstractHelper
 
             return $array;
         }
-
-        return array_filter($storage, $callback, ARRAY_FILTER_USE_BOTH);
     }
 
     /**
