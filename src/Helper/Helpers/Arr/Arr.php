@@ -32,7 +32,7 @@ class Arr extends AbstractHelper
     {
         if (defined('HHVM_VERSION'))
         {
-            $array = [];
+            $array = []; // fixme : hhvm please
             foreach ($storage as $key => $value)
             {
                 if ($callback($value, $key))
