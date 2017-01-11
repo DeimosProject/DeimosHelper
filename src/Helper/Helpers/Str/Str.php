@@ -121,7 +121,7 @@ class Str extends AbstractHelper
     protected function rand($chars, $length)
     {
         $string = '';
-        $max    = $this->len($chars);
+        $max    = $this->len($chars) - 1;
 
         for ($i = 0; $i < $length; $i++)
         {
