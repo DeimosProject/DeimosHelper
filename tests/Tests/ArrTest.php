@@ -161,8 +161,33 @@ class ArrTest extends \DeimosTest\TestSetUp
         $reflection = new \ReflectionMethod(Arr::class, 'findPath');
         $reflection->setAccessible(true);
 
-        $reflection->invoke($this->helper()->arr(), [], []);
+        $storage = [];
 
+        $reflection->invoke($this->helper()->arr(), $storage, []);
+    }
+
+    public function testSet()
+    {
+        $storage = ['a' => ['b' => 1]];
+
+        $this->helper()->arr()->set($storage, 'a.b', 2);
+        $this->helper()->arr()->set($storage, 'a.c', 1);
+        $this->helper()->arr()->set($storage, 'a.d.e.f.g', ['a' => ['b' => 1]]);
+
+        $this->assertEquals(
+            $this->helper()->arr()->get($storage, 'a.b'),
+            2
+        );
+
+        $this->assertEquals(
+            $this->helper()->arr()->get($storage, 'a.c'),
+            1
+        );
+
+        $this->assertEquals(
+            $this->helper()->arr()->get($storage, 'a.d.e.f.g.a.b'),
+            1
+        );
     }
 
     public function testFirstKey()

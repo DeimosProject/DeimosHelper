@@ -104,6 +104,29 @@ class Arr extends AbstractHelper
     }
 
     /**
+     * @param array  $storage
+     * @param string $path
+     * @param mixed  $value
+     */
+    public function set(array &$storage, $path, $value)
+    {
+        $keys = $this->keys($path);
+
+        $rows = &$storage;
+        foreach ($keys as $key)
+        {
+            if (!$this->keyExists($rows, $key))
+            {
+                $rows[$key] = [];
+            }
+
+            $rows = &$rows[$key];
+        }
+
+        $rows = $value;
+    }
+
+    /**
      * @param array $storage
      * @param array $keys
      *
