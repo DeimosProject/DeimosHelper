@@ -148,8 +148,6 @@ class Str extends AbstractHelper
     public function fileSize($size, $decimals = 2)
     {
 
-        $postfix = 'B';
-
         switch (true)
         {
             case $size >= ((1 << 50) * 10):
@@ -176,6 +174,9 @@ class Str extends AbstractHelper
                 $postfix = 'KB';
                 $size /= (1 << 10);
                 break;
+
+            default:
+                $postfix = 'B';
         }
 
         return round($size, $decimals) . ' ' . $postfix;
