@@ -49,7 +49,10 @@ class ArrTest extends \DeimosTest\TestSetUp
     public function testFilterHHVM()
     {
 
-        defined('HHVM_VERSION') OR define('HHVM_VERSION', 1);
+        if (!defined('HHVM_VERSION'))
+        {
+            define('HHVM_VERSION', 1);
+        }
 
         $this->testFilter();
 
@@ -161,9 +164,7 @@ class ArrTest extends \DeimosTest\TestSetUp
         $reflection = new \ReflectionMethod(Arr::class, 'findPath');
         $reflection->setAccessible(true);
 
-        $storage = [];
-
-        $reflection->invoke($this->helper()->arr(), $storage, []);
+        $reflection->invoke($this->helper()->arr(), [], []);
     }
 
     public function testSet()

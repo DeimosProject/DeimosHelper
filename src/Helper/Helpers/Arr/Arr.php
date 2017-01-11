@@ -149,7 +149,7 @@ class Arr extends AbstractHelper
                 throw new ExceptionEmpty("Key {$key} not found");
             }
 
-            $rows = $rows[$key];
+            $rows = &$rows[$key];
         }
 
         return $rows;
