@@ -51,10 +51,18 @@ class ArrTest extends \DeimosTest\TestSetUp
 
         if (!defined('HHVM_VERSION'))
         {
-            define('HHVM_VERSION', 1);
+            define('HHVM_VERSION', 'hhvm');
         }
 
-        $this->testFilter();
+        $resultArray = $this->helper()->arr()->filter($this->array, function (&$var, $key)
+        {
+            return is_int($key);
+        });
+
+        foreach ($resultArray as $key => $value)
+        {
+            $this->assertTrue(is_int($key));
+        }
 
     }
 
