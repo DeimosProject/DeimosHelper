@@ -46,21 +46,6 @@ class ArrTest extends \DeimosTest\TestSetUp
 
     }
 
-    public function testFilterHHVM()
-    {
-
-        $resultArray = $this->helper()->arr2()->filter($this->array, function (&$var, $key)
-        {
-            return is_int($key);
-        });
-
-        foreach ($resultArray as $key => $value)
-        {
-            $this->assertTrue(is_int($key));
-        }
-
-    }
-
     public function testKeyExists()
     {
 

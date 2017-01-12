@@ -23,14 +23,6 @@ class Arr extends AbstractHelper
     }
 
     /**
-     * @return bool
-     */
-    protected function isHHVM()
-    {
-        return defined('HHVM_VERSION');
-    }
-
-    /**
      * @param array    $storage
      * @param callable $callback
      *
@@ -38,20 +30,6 @@ class Arr extends AbstractHelper
      */
     public function filter(array $storage, $callback)
     {
-        if ($this->isHHVM())
-        {
-            $array = [];
-            foreach ($storage as $key => $value)
-            {
-                if ($callback($value, $key))
-                {
-                    $array[$key] = $value;
-                }
-            }
-
-            return $array;
-        }
-
         return array_filter($storage, $callback, ARRAY_FILTER_USE_BOTH);
     }
 
