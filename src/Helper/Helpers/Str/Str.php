@@ -12,7 +12,7 @@ class Str extends AbstractHelper
     const DIGITS        = '0123456789';
     const ALPHABET_LOW  = 'abcdefghijklmnopqrstuvwxyz';
     const ALPHABET_HIGH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const ALPHABET      = self::ALPHABET_LOW . self::ALPHABET_HIGH;
+    const ALPHABET      = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
     const RAND_ALPHA_LOW  = 1;
     const RAND_ALPHA_HIGH = 2;

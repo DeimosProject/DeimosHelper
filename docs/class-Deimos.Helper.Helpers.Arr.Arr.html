@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Deimos\Helper\Helpers\Arr\Arr</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-Deimos.html">
+						Deimos<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Deimos.Helper.html">
+						Helper<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-Deimos.Helper.Exceptions.html">
+						Exceptions					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-Deimos.Helper.Helpers.html">
+						Helpers<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-Deimos.Helper.Helpers.Arr.html">
+						Arr					</a>
+
+						</li>
+				<li>
+					<a href="namespace-Deimos.Helper.Helpers.Str.html">
+						Str					</a>
+
+						</li>
+							</ul></li>
+				<li>
+					<a href="namespace-Deimos.Helper.Traits.html">
+						Traits					</a>
+
+						</li>
+							</ul></li></ul></li>
+				<li>
+					<a href="namespace-PHP.html">
+						PHP					</a>
+
+						</li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-Deimos.Helper.Helpers.Arr.Arr.html">Arr</a></li>
+			</ul>
+
+
+			<h3>Traits</h3>
+			<ul>
+				<li><a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html">KeyTrait</a></li>
+				<li><a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html">StackTrait</a></li>
+			</ul>
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-Deimos.Helper.Helpers.Arr.html" title="Summary of Deimos\Helper\Helpers\Arr"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+				<li>
+					<a href="annotation-group-deprecated.html" title="List of elements with deprecated annotation">
+						<span>Deprecated</span>
+					</a>
+				</li>
+				<li>
+					<a href="annotation-group-todo.html" title="List of elements with todo annotation">
+						<span>Todo</span>
+					</a>
+				</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Arr</h1>
+
+
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-Deimos.Helper.AbstractHelper.html"><span>Deimos\Helper\AbstractHelper</span></a>
+			
+			 implements 
+				<a href="class-Deimos.Helper.InterfaceHelper.html"><span>Deimos\Helper\InterfaceHelper</span></a>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>Deimos\Helper\Helpers\Arr\Arr</span></b>			
+			
+			 uses 
+					<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html"><span>Deimos\Helper\Helpers\Arr\KeyTrait</span></a>, 
+			
+					<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html"><span>Deimos\Helper\Helpers\Arr\StackTrait</span></a>
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Deimos.html">Deimos</a>\<a href="namespace-Deimos.Helper.html">Helper</a>\<a href="namespace-Deimos.Helper.Helpers.html">Helpers</a>\<a href="namespace-Deimos.Helper.Helpers.Arr.html">Arr</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#8-156" title="Go to source code">Helper/Helpers/Arr/Arr.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="map" id="_map">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_map">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#14-23" title="Go to source code">map</a>( <span>array <var>$storage</var></span>, <span>callable <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+					<dt><var>$callback</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="filter" id="_filter">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_filter">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#25-34" title="Go to source code">filter</a>( <span>array <var>$storage</var></span>, <span>callable <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+					<dt><var>$callback</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="fill" id="_fill">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fill">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#36-46" title="Go to source code">fill</a>( <span> <var>$string</var></span>, <span> <var>$length</var></span>, <span>integer <var>$start</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$string</var></dt>
+					<dd></dd>
+					<dt><var>$length</var></dt>
+					<dd></dd>
+					<dt><var>$start</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="range" id="_range">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_range">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#48-58" title="Go to source code">range</a>( <span>mixed <var>$begin</var></span>, <span>mixed <var>$end</var></span>, <span>integer <var>$step</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$begin</var></dt>
+					<dd></dd>
+					<dt><var>$end</var></dt>
+					<dd></dd>
+					<dt><var>$step</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="inStrict" id="_inStrict">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_inStrict">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#60-69" title="Go to source code">inStrict</a>( <span>array <var>$storage</var></span>, <span>mixed <var>$needle</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+					<dt><var>$needle</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="in" id="_in">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_in">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#71-80" title="Go to source code">in</a>( <span>array <var>$storage</var></span>, <span>mixed <var>$needle</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+					<dt><var>$needle</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="shuffle" id="_shuffle">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_shuffle">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#82-90" title="Go to source code">shuffle</a>( <span>array <var>&amp; $storage</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="set" id="_set">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#92-113" title="Go to source code">set</a>( <span>array <var>&amp; $storage</var></span>, <span>string <var>$path</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+					<dt><var>$path</var></dt>
+					<dd></dd>
+					<dt><var>$value</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="findPath" id="_findPath">
+
+		<td class="attributes"><code>
+			 protected 
+
+			array|mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_findPath">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#115-142" title="Go to source code">findPath</a>( <span>array <var>$storage</var></span>, <span>array <var>$keys</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+					<dt><var>$keys</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array|mixed
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Deimos.Helper.Exceptions.ExceptionEmpty.html">Deimos\Helper\Exceptions\ExceptionEmpty</a></code>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRequired" id="_getRequired">
+
+		<td class="attributes"><code>
+			 public 
+
+			array|mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRequired">#</a>
+		<code><a href="source-class-Deimos.Helper.Helpers.Arr.Arr.html#144-154" title="Go to source code">getRequired</a>( <span>array <var>$storage</var></span>, <span>null <var>$key</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$storage</var></dt>
+					<dd></dd>
+					<dt><var>$key</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					array|mixed
+				</div>
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><a href="class-Deimos.Helper.Exceptions.ExceptionEmpty.html">Deimos\Helper\Exceptions\ExceptionEmpty</a></code>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-Deimos.Helper.AbstractHelper.html#methods">Deimos\Helper\AbstractHelper</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Deimos.Helper.AbstractHelper.html#___construct">__construct()</a>
+		</code></td>
+	</tr>
+	</table>
+
+	<table class="summary used">
+	<caption>Methods used from <a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#methods">Deimos\Helper\Helpers\Arr\KeyTrait</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#_at">at()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#_evenKey">evenKey()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#_firstKey">firstKey()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#_keyExists">keyExists()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#_keys">keys()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#_lastKey">lastKey()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.KeyTrait.html#_oddKey">oddKey()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary used">
+	<caption>Methods used from <a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#methods">Deimos\Helper\Helpers\Arr\StackTrait</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_even">even()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_first">first()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_get">get()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_initOrPush">initOrPush()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_last">last()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_odd">odd()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_pop">pop()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_push">push()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_shift">shift()</a>, 
+			<a href="class-Deimos.Helper.Helpers.Arr.StackTrait.html#_unShift">unShift()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-Deimos.Helper.AbstractHelper.html#properties">Deimos\Helper\AbstractHelper</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-Deimos.Helper.AbstractHelper.html#$helper"><var>$helper</var></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
