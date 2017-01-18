@@ -132,7 +132,7 @@ class Arr extends AbstractHelper
         {
             if (!$this->keyExists($rows, $key))
             {
-                throw new ExceptionEmpty("Key {$key} not found");
+                throw new ExceptionEmpty("Key '{$key}' not found");
             }
 
             $rows = &$rows[$key];
