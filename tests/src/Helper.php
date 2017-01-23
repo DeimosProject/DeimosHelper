@@ -16,4 +16,15 @@ class Helper extends \Deimos\Helper\Helper
         }, __METHOD__);
     }
 
+    /**
+     * @return File
+     */
+    public function file2()
+    {
+        return $this->once(function ()
+        {
+            return new File($this);
+        }, __METHOD__);
+    }
+
 }

@@ -3,9 +3,12 @@
 namespace Tests;
 
 use Deimos\Helper\InterfaceHelper;
+use Deimos\Helper\Traits\Helper;
 
 class InterfaceTest extends \DeimosTest\TestSetUp
 {
+
+    use Helper;
 
     public function testInterfaceTest()
     {

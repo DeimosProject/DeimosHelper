@@ -3,9 +3,12 @@
 namespace Tests;
 
 use Deimos\Helper\Helpers\Str\Str;
+use Deimos\Helper\Traits\Helper;
 
 class StrTest extends \DeimosTest\TestSetUp
 {
+
+    use Helper;
 
     public function testShorter()
     {

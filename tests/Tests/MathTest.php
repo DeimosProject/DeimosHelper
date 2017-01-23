@@ -2,8 +2,12 @@
 
 namespace Tests;
 
+use Deimos\Helper\Traits\Helper;
+
 class MathTest extends \DeimosTest\TestSetUp
 {
+
+    use Helper;
 
     public function testSqr()
     {

@@ -2,8 +2,12 @@
 
 namespace Tests;
 
+use Deimos\Helper\Traits\Helper;
+
 class MoneyTest extends \DeimosTest\TestSetUp
 {
+
+    use Helper;
 
     protected $moneyValue = 1234.15;
 

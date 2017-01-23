@@ -2,8 +2,12 @@
 
 namespace Tests;
 
+use Deimos\Helper\Traits\Helper;
+
 class DirTest extends \DeimosTest\TestSetUp
 {
+
+    use Helper;
 
     public function testDir()
     {

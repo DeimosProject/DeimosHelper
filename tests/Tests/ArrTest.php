@@ -4,9 +4,12 @@ namespace Tests;
 
 use Deimos\Helper\Exceptions\ExceptionEmpty;
 use Deimos\Helper\Helpers\Arr\Arr;
+use Deimos\Helper\Traits\Helper;
 
 class ArrTest extends \DeimosTest\TestSetUp
 {
+
+    use Helper;
 
     protected $array = [
         1, 2, 3, 4,

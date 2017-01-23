@@ -7,6 +7,8 @@ use Deimos\Helper\Helper;
 class InitTest extends \DeimosTest\TestSetUp
 {
 
+    use \Deimos\Helper\Traits\Helper;
+
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Instanceof SELF

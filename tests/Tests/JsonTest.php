@@ -2,8 +2,12 @@
 
 namespace Tests;
 
+use Deimos\Helper\Traits\Helper;
+
 class JsonTest extends \DeimosTest\TestSetUp
 {
+
+    use Helper;
 
     protected $array = [
         1, 2, 3,
