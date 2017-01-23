@@ -58,7 +58,7 @@ trait DefaultTrait
     }
 
     /**
-     * @param $string
+     * @param string $string
      *
      * @return int
      */
