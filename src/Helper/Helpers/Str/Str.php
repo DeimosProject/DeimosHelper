@@ -136,7 +136,7 @@ class Str extends AbstractHelper
      */
     public function uniqid()
     {
-        return \uniqid(\random_int(PHP_INT_MIN, PHP_INT_MAX), true);
+        return \uniqid(\random_int(\PHP_INT_MIN, \PHP_INT_MAX), true);
     }
 
     /**
