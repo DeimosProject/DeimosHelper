@@ -1,5 +1,10 @@
 {
   "name": "deimos/helper",
+  "description": "Deimos Helper.",
+  "keywords": [
+    "deimos",
+    "helper"
+  ],
   "license": "MIT",
   "authors": [
     {
