@@ -125,7 +125,7 @@ class Str extends AbstractHelper
 
         for ($i = 0; $i < $length; $i++)
         {
-            $string .= $chars[\random_int(0, $max)];
+            $string .= $chars[random_int(0, $max)];
         }
 
         return $string;
@@ -136,7 +136,7 @@ class Str extends AbstractHelper
      */
     public function uniqid()
     {
-        return uniqid(\random_int(), true);
+        return uniqid(random_int(), true);
     }
 
     /**
@@ -191,7 +191,7 @@ class Str extends AbstractHelper
      */
     public function translit($string)
     {
-        $string = \strtr($string, [
+        $string = strtr($string, [
                 'ОАО '  => 'OJSC ',
                 'ЗАО '  => 'CJSC ',
                 'ООО '  => 'LLC ',
@@ -219,7 +219,7 @@ class Str extends AbstractHelper
             ]
         );
 
-        return \iconv(\mb_internal_encoding(), 'ASCII//TRANSLIT', $string);
+        return iconv(mb_internal_encoding(), 'ASCII//TRANSLIT', $string);
     }
 
 }
