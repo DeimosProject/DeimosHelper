@@ -14,7 +14,7 @@ trait DefaultTrait
      */
     public function sub($string, $start, $length = null)
     {
-        return mb_substr($string, $start, $length);
+        return \mb_substr($string, $start, $length);
     }
 
     /**
@@ -24,7 +24,7 @@ trait DefaultTrait
      */
     public function upp($string)
     {
-        return mb_convert_case($string, MB_CASE_UPPER);
+        return \mb_convert_case($string, MB_CASE_UPPER);
     }
 
     /**
@@ -34,7 +34,7 @@ trait DefaultTrait
      */
     public function low($string)
     {
-        return mb_convert_case($string, MB_CASE_LOWER);
+        return \mb_convert_case($string, MB_CASE_LOWER);
     }
 
     /**
@@ -44,7 +44,7 @@ trait DefaultTrait
      */
     public function capitalize($string)
     {
-        return mb_convert_case($string, MB_CASE_TITLE);
+        return \mb_convert_case($string, MB_CASE_TITLE);
     }
 
     /**
@@ -54,7 +54,7 @@ trait DefaultTrait
      */
     public function toNumber($string)
     {
-        return preg_replace('/\D/', '', $string);
+        return \preg_replace('/\D/', '', $string);
     }
 
     /**
@@ -64,7 +64,7 @@ trait DefaultTrait
      */
     public function len($string)
     {
-        return mb_strlen($string);
+        return \mb_strlen($string);
     }
 
     /**
@@ -76,7 +76,7 @@ trait DefaultTrait
      */
     public function pos($string, $needle, $offset = null)
     {
-        return mb_strpos($string, $needle, $offset);
+        return \mb_strpos($string, $needle, $offset);
     }
 
     /**
@@ -87,7 +87,7 @@ trait DefaultTrait
      */
     public function repeat($string, $multiplier)
     {
-        return str_repeat($string, $multiplier);
+        return \str_repeat($string, $multiplier);
     }
 
     /**
