@@ -42,7 +42,7 @@ trait StackTrait
      * @param array $storage
      * @param       $mixed
      *
-     * @return integer
+     * @return int
      */
     public function unShift(array &$storage, $mixed)
     {
