@@ -189,7 +189,7 @@ class Str extends AbstractHelper
      * @param int $size
      * @param int $decimals
      *
-     * @return float
+     * @return string
      */
     public function fileSize($size, $decimals = 2)
     {
