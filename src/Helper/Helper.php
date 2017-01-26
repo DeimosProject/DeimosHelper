@@ -106,4 +106,15 @@ class Helper extends Builder
         }, __METHOD__);
     }
 
+    /**
+     * @return Helpers\Stream
+     */
+    public function stream()
+    {
+        return $this->once(function ()
+        {
+            return new Helpers\Stream($this);
+        });
+    }
+
 }
