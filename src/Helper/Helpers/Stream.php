@@ -28,6 +28,7 @@ class Stream extends AbstractHelper
     {
         $fromStream = $this->buffer($fromPath);
 
+        // todo : 1271 tests writable & touch $toPath file
         file_put_contents($toPath, $fromStream);
 
         return fclose($fromStream);
