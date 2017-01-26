@@ -11,7 +11,7 @@ trait StackTrait
      * @param array $storage
      * @param       $mixed
      *
-     * @return integer
+     * @return int
      */
     public function push(array &$storage, $mixed)
     {
@@ -123,7 +123,7 @@ trait StackTrait
     /**
      * @param array  $storage
      * @param string $key
-     * @param integer  $value
+     * @param int    $value
      */
     public function initOrPush(array &$storage, $key, $value)
     {
