@@ -123,7 +123,7 @@ trait StackTrait
     /**
      * @param array  $storage
      * @param string $key
-     * @param int    $value
+     * @param int  $value
      */
     public function initOrPush(array &$storage, $key, $value)
     {
