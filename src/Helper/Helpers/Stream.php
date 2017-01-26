@@ -8,6 +8,17 @@ class Stream extends AbstractHelper
 {
 
     /**
+     * @param string $source
+     * @param string $mode
+     *
+     * @return resource
+     */
+    protected function buffer($source, $mode = 'b')
+    {
+        return fopen($source, $mode);
+    }
+
+    /**
      * @param string $fromPath
      * @param string $toPath
      *
@@ -15,10 +26,11 @@ class Stream extends AbstractHelper
      */
     public function download($fromPath, $toPath)
     {
-        $stream = fopen($fromPath, 'b');
-        file_put_contents($toPath, $stream);
+        $fromStream = $this->buffer($fromPath);
 
-        return fclose($stream);
+        file_put_contents($toPath, $fromStream);
+
+        return fclose($fromStream);
     }
 
 }
