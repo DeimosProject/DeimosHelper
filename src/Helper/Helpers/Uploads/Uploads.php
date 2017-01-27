@@ -15,7 +15,7 @@ class Uploads extends AbstractHelper
     /**
      * @param string $name
      *
-     * @return array
+     * @return Simple[]
      */
     public function get($name)
     {
