@@ -54,7 +54,7 @@ class Simple
      */
     protected function file(array &$files, $type, $index)
     {
-        if (isset($files[$type][$index]))
+        if (is_array($files[$type]))
         {
             return $files[$type][$index];
         }
