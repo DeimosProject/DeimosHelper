@@ -7,10 +7,13 @@ use Deimos\Helper\AbstractHelper;
 class Uploads extends AbstractHelper
 {
 
+    /**
+     * @var array
+     */
     protected $storage = [];
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return array
      */
@@ -37,13 +40,13 @@ class Uploads extends AbstractHelper
     /**
      * @return array
      */
-    final public function &files()
+    public function &files()
     {
         return $_FILES;
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return array
      */
@@ -55,8 +58,8 @@ class Uploads extends AbstractHelper
     }
 
     /**
-     * @param     $name
-     * @param int $index
+     * @param string $name
+     * @param int    $index
      *
      * @return Simple|null
      */

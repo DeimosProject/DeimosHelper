@@ -15,8 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     $helper = new \Deimos\Helper\Helper(new \Deimos\Builder\Builder());
 
-    $file = $helper->uploads()->simple('file');
+    $files = $helper->uploads()->get('file');
 
-    $file->save($file->name());
+    var_dump($files);
+
+    $uploads = $helper->uploads();
+
+    var_dump($uploads);
 
 }

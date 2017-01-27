@@ -38,21 +38,21 @@ class Simple
      */
     public function __construct(array &$files, $index)
     {
-        $this->tmpName = $this->file($files, $index, 'tmp_name');
-        $this->error   = $this->file($files, $index, 'error');
-        $this->name    = $this->file($files, $index, 'name');
-        $this->size    = $this->file($files, $index, 'size');
-        $this->type    = $this->file($files, $index, 'type');
+        $this->tmpName = $this->file($files, 'tmp_name', $index);
+        $this->error   = $this->file($files, 'error', $index);
+        $this->name    = $this->file($files, 'name', $index);
+        $this->size    = $this->file($files, 'size', $index);
+        $this->type    = $this->file($files, 'type', $index);
     }
 
     /**
      * @param array  $files
-     * @param int    $index
      * @param string $type
+     * @param int    $index
      *
      * @return mixed
      */
-    protected function file(array &$files, $index, $type)
+    protected function file(array &$files, $type, $index)
     {
         if (isset($files[$type][$index]))
         {
