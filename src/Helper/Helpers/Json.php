@@ -55,14 +55,11 @@ class Json extends AbstractHelper
     }
 
     /**
-     * @param string $data
-     * @param bool   $assoc
-     *
-     * @return mixed
+     * @return int
      */
-    public function decode($data, $assoc = true)
+    private function encodeOptions()
     {
-        return json_decode($data, $assoc, 512, $this->decodeOptions());
+        return $this->options(self::OPTIONS_ENCODE);
     }
 
     /**
@@ -86,11 +83,14 @@ class Json extends AbstractHelper
     }
 
     /**
-     * @return int
+     * @param string $data
+     * @param bool   $assoc
+     *
+     * @return mixed
      */
-    private function encodeOptions()
+    public function decode($data, $assoc = true)
     {
-        return $this->options(self::OPTIONS_ENCODE);
+        return json_decode($data, $assoc, 512, $this->decodeOptions());
     }
 
     /**

@@ -59,16 +59,6 @@ trait DefaultTrait
 
     /**
      * @param string $string
-     *
-     * @return int
-     */
-    public function len($string)
-    {
-        return \mb_strlen($string);
-    }
-
-    /**
-     * @param string $string
      * @param string $needle
      * @param int    $offset
      *
@@ -98,6 +88,16 @@ trait DefaultTrait
     public function shuffle($string)
     {
         return $this->rand($string, $this->len($string));
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return int
+     */
+    public function len($string)
+    {
+        return \mb_strlen($string);
     }
 
 }

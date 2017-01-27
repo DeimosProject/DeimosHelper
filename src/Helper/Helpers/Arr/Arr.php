@@ -114,6 +114,18 @@ class Arr extends AbstractHelper
 
     /**
      * @param array $storage
+     * @param null  $key
+     *
+     * @return array|mixed
+     * @throws ExceptionEmpty
+     */
+    public function getRequired(array $storage, $key = null)
+    {
+        return $this->findPath($storage, $this->keys($key));
+    }
+
+    /**
+     * @param array $storage
      * @param array $keys
      *
      * @return array|mixed
@@ -139,18 +151,6 @@ class Arr extends AbstractHelper
         }
 
         return $rows;
-    }
-
-    /**
-     * @param array $storage
-     * @param null  $key
-     *
-     * @return array|mixed
-     * @throws ExceptionEmpty
-     */
-    public function getRequired(array $storage, $key = null)
-    {
-        return $this->findPath($storage, $this->keys($key));
     }
 
 }

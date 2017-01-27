@@ -23,21 +23,6 @@ trait Helper
      *
      * @throws \InvalidArgumentException
      */
-    private function instanceHelper()
-    {
-        if (method_exists($this->builder, 'helper'))
-        {
-            return $this->builder->helper();
-        }
-
-        return new DeimosHelper($this->builder);
-    }
-
-    /**
-     * @return DeimosHelper
-     *
-     * @throws \InvalidArgumentException
-     */
     protected final function helper()
     {
         if (!$this->helper)
@@ -46,6 +31,21 @@ trait Helper
         }
 
         return $this->helper;
+    }
+
+    /**
+     * @return DeimosHelper
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function instanceHelper()
+    {
+        if (method_exists($this->builder, 'helper'))
+        {
+            return $this->builder->helper();
+        }
+
+        return new DeimosHelper($this->builder);
     }
 
 }

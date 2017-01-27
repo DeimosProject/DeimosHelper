@@ -107,6 +107,17 @@ class Helper extends Builder
     }
 
     /**
+     * @return Helpers\Uploads\Uploads
+     */
+    public function uploads()
+    {
+        return $this->once(function ()
+        {
+            return new Helpers\Uploads\Uploads($this);
+        }, __METHOD__);
+    }
+
+    /**
      * @return Helpers\Stream
      */
     public function stream()
@@ -114,7 +125,7 @@ class Helper extends Builder
         return $this->once(function ()
         {
             return new Helpers\Stream($this);
-        });
+        }, __METHOD__);
     }
 
 }

@@ -2,8 +2,6 @@
 
 namespace Deimos\Helper;
 
-use Deimos\Helper\InterfaceHelper;
-
 abstract class AbstractHelper implements InterfaceHelper
 {
 
