@@ -14,7 +14,7 @@ class File extends AbstractHelper
      */
     public function touch($path)
     {
-        return touch($path);
+        return @touch($path);
     }
 
     /**

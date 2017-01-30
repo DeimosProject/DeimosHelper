@@ -43,9 +43,9 @@ class Stream extends AbstractHelper
      *
      * @return resource
      */
-    protected function buffer($source, $mode = 'b')
+    protected function buffer($source, $mode = 'r')
     {
-        return @fopen($source, $mode);
+        return @fopen($source, $mode . 'b');
     }
 
 }
