@@ -2,13 +2,11 @@
 
 namespace DeimosTest;
 
-use Deimos\Helper\Traits\Helper;
-
 class TestSetUp extends \PHPUnit_Framework_TestCase
 {
 
     /**
-     * @var \DeimosTest\Helper
+     * @var Helper
      */
     protected $_helper;
 
@@ -19,7 +17,7 @@ class TestSetUp extends \PHPUnit_Framework_TestCase
 
         $this->builder = new Builder();
 
-        $this->_helper = new \DeimosTest\Helper($this->builder);
+        $this->_helper = new Helper($this->builder);
     }
 
 }

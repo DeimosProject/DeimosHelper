@@ -6,17 +6,6 @@ class Helper extends \Deimos\Helper\Helper
 {
 
     /**
-     * @return Arr
-     */
-    public function arr2()
-    {
-        return $this->once(function ()
-        {
-            return new Arr($this);
-        }, __METHOD__);
-    }
-
-    /**
      * @return File
      */
     public function file2()
@@ -24,6 +13,14 @@ class Helper extends \Deimos\Helper\Helper
         return $this->once(function ()
         {
             return new File($this);
+        }, __METHOD__);
+    }
+
+    public function uploads2()
+    {
+        return $this->once(function ()
+        {
+            return new Uploads($this);
         }, __METHOD__);
     }
 
