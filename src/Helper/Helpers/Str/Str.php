@@ -160,9 +160,11 @@ class Str extends AbstractHelper
         $string = '';
         $max    = $this->len($chars) - 1;
 
-        for ($i = 0; $i < $length; $i++)
+        $i = 0;
+        while($i < $length)
         {
             $string .= $chars[\random_int(0, $max)];
+            $i++;
         }
 
         return $string;
