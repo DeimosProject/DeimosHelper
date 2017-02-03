@@ -31,6 +31,8 @@ class File extends AbstractHelper
      * @param string $path
      *
      * @return bool
+     *
+     * @deprecated use File->isFile OR Dir->isDir, as it slowly
      */
     public function exists($path)
     {
@@ -64,7 +66,7 @@ class File extends AbstractHelper
      */
     public function isFile($path)
     {
-        return (is_file($path) && !$this->helper->dir()->isDir($path));
+        return is_file($path);
     }
 
 }
