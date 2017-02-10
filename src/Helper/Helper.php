@@ -128,4 +128,12 @@ class Helper extends Builder
         }, __METHOD__);
     }
 
+    /**
+     * @return Helpers\Send
+     */
+    public function send()
+    {
+        return new Helpers\Send($this);
+    }
+
 }
