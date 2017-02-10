@@ -49,6 +49,11 @@ class Send extends AbstractHelper
     {
         $this->ch = curl_init();
 
+        if($this->to)
+        {
+            curl_setopt($this->ch, CURLOPT_URL, $this->to);
+        }
+
         if (!empty($this->files))
         {
             curl_setopt($this->ch, CURLOPT_BINARYTRANSFER, true);
@@ -124,15 +129,24 @@ class Send extends AbstractHelper
     /**
      * @param string $to
      *
+     * @return $this
+     */
+    public function to($to)
+    {
+        $this->to = $to;
+
+        return $this;
+    }
+
+    /**
      * @return mixed
      *
      * @throws CurlError
      */
-    public function exec($to)
+    public function exec()
     {
         $this->build();
 
-        curl_setopt($this->ch, CURLOPT_URL, $to);
         $data = curl_exec($this->ch);
 
         if(curl_errno($this->ch))
