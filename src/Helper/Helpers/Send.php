@@ -61,7 +61,7 @@ class Send extends AbstractHelper
 
             foreach ($this->files as $key => $file)
             {
-                $this->data[$key] = '@' . $file;
+                $this->data[$key] = new \CURLFile($file, mime_content_type($file));
             }
         }
 
