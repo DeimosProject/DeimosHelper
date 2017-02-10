@@ -81,7 +81,7 @@ class Send extends AbstractHelper
 
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->headers);
 
-        curl_setopt($this->ch, CURLOPT_POSTFIELDS, http_build_query($this->data));
+        curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->data);
     }
 
     /**
