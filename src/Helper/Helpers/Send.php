@@ -121,18 +121,6 @@ class Send extends AbstractHelper
     /**
      * @param string $to
      *
-     * @return $this
-     */
-    public function to($to)
-    {
-        $this->to = trim($to, '?');
-
-        return $this;
-    }
-
-    /**
-     * @param string $to
-     *
      * @return mixed
      *
      * @throws CurlError
