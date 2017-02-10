@@ -49,9 +49,15 @@ class Send extends AbstractHelper
     {
         $this->ch = curl_init();
 
-        foreach ($this->files as $key => $file)
+        if (!empty($this->files))
         {
-            $this->data[$key] = '@' . $file;
+            curl_setopt($this->ch, CURLOPT_BINARYTRANSFER, true);
+            curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+
+            foreach ($this->files as $key => $file)
+            {
+                $this->data[$key] = '@' . $file;
+            }
         }
 
         if ($this->method === 'GET')
@@ -86,9 +92,6 @@ class Send extends AbstractHelper
      */
     public function file($name, $path)
     {
-        curl_setopt($this->ch, CURLOPT_BINARYTRANSFER, true);
-        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-
         $this->files[$name] = $path;
 
         return $this;
