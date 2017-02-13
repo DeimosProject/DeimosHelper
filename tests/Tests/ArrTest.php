@@ -20,7 +20,6 @@ class ArrTest extends \DeimosTest\TestSetUp
 
     public function testMap()
     {
-
         $resultArray = $this->helper()->arr()->map($this->array, function ($element)
         {
 
@@ -36,7 +35,6 @@ class ArrTest extends \DeimosTest\TestSetUp
 
     public function testFilter()
     {
-
         $resultArray = $this->helper()->arr()->filter($this->array, function ($var)
         {
             return ($var & 1);
@@ -46,12 +44,10 @@ class ArrTest extends \DeimosTest\TestSetUp
         {
             $this->assertEquals($value % 2, 1);
         }
-
     }
 
     public function testKeyExists()
     {
-
         $this->assertTrue($this->helper()->arr()->keyExists(
             $this->helper()->arr()->range(0, 5),
             3
@@ -65,7 +61,6 @@ class ArrTest extends \DeimosTest\TestSetUp
 
     public function testGet()
     {
-
         $this->assertEquals($this->helper()->arr()->get($this->array, 0), 1);
         $this->assertEquals($this->helper()->arr()->get($this->array, 0, 'a'), 1);
         $this->assertEquals($this->helper()->arr()->get($this->array, 'a', 'c'), 'c');
@@ -73,28 +68,23 @@ class ArrTest extends \DeimosTest\TestSetUp
         $this->assertNull($this->helper()->arr()->get($this->array, 'c', null));
     }
 
-    public function testGetRequired()
+    public function testRequired()
     {
+        $this->assertNotNull($this->helper()->arr()->getRequired($this->array, 0));
+        $this->assertNotNull($this->helper()->arr()->getRequired($this->array, 3));
+        $this->assertNotNull($this->helper()->arr()->getRequired($this->array, 'b'));
+    }
 
-        $this->helper()->arr()->getRequired($this->array, 0);
-        $this->helper()->arr()->getRequired($this->array, 3);
-        $this->helper()->arr()->getRequired($this->array, 'b');
-
-        try
-        {
-
-            $this->helper()->arr()->getRequired($this->array, 'd');
-
-            throw new \Exception();
-        }
-        catch (ExceptionEmpty $e)
-        {
-        }
+    /**
+     * @expectedException \Deimos\Helper\Exceptions\ExceptionEmpty
+     */
+    public function testGetRequiredError()
+    {
+        $this->helper()->arr()->getRequired($this->array, 'd');
     }
 
     public function testFill()
     {
-
         $array = $this->helper()->arr()->fill('a', 3);
 
         $this->assertEquals(
@@ -102,12 +92,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             ['a', 'a', 'a',],
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testRange()
     {
-
         $this->assertEquals(
             $this->helper()->arr()->range(0, 2),
             [0, 1, 2],
@@ -117,32 +105,26 @@ class ArrTest extends \DeimosTest\TestSetUp
 
     public function testInStrict()
     {
-
         $result = $this->helper()->arr()->inStrict($this->array, '1');
 
         $this->assertNotEquals($this->array[1], $result);
-
     }
 
     public function testIn()
     {
-
         $result = $this->helper()->arr()->in($this->array, '1');
 
         $this->assertEquals($this->array[1], $result);
-
     }
 
     public function testShuffle()
     {
-
         $array = $this->helper()->arr()->range(0, 999);
         $this->assertNotEquals(
             $array,
             $this->helper()->arr()->shuffle($array),
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     /**
@@ -151,7 +133,6 @@ class ArrTest extends \DeimosTest\TestSetUp
      */
     public function testFindPath()
     {
-
         $reflection = new \ReflectionMethod(Arr::class, 'findPath');
         $reflection->setAccessible(true);
 
@@ -184,7 +165,6 @@ class ArrTest extends \DeimosTest\TestSetUp
 
     public function testFirstKey()
     {
-
         $this->assertEquals(
             $this->helper()->arr()->firstKey($this->array),
             0
@@ -199,12 +179,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             $this->helper()->arr()->firstKey(['a' => 0, 'w' => 5, 1, 4, 6]),
             0
         );
-
     }
 
     public function testLastKey()
     {
-
         $this->assertEquals(
             $this->helper()->arr()->lastKey($this->array),
             6
@@ -219,22 +197,18 @@ class ArrTest extends \DeimosTest\TestSetUp
             $this->helper()->arr()->lastKey(['a' => 0, 'w' => 5, 1, 4, 6]),
             0
         );
-
     }
 
     public function testAt()
     {
-
         $this->assertEquals(
             $this->helper()->arr()->at($this->array, 2),
             3
         );
-
     }
 
     public function testOddKey()
     {
-
         $array = $this->helper()->arr()->oddKey($this->helper()->arr()->range(0, 10));
 
         $this->assertEquals(
@@ -248,12 +222,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             $this->helper()->arr()->range(0, 10, 2),
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testEvenKey()
     {
-
         $array = $this->helper()->arr()->evenKey($this->helper()->arr()->range(0, 10));
 
         $this->assertEquals(
@@ -267,12 +239,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             $this->helper()->arr()->range(1, 10, 2),
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testPush()
     {
-
         $array = [1];
 
         $index = $this->helper()->arr()->push($array, 2);
@@ -284,12 +254,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             [1, 2],
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testPop()
     {
-
         $array = [1, 2];
 
         $index = $this->helper()->arr()->pop($array);
@@ -304,12 +272,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             [1],
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testUnShift()
     {
-
         $array = [1];
 
         $index = $this->helper()->arr()->unShift($array, 2);
@@ -321,12 +287,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             [2, 1],
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testShift()
     {
-
         $array = [1, 2];
 
         $index = $this->helper()->arr()->shift($array);
@@ -341,12 +305,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             [2],
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testFirst()
     {
-
         next($this->array);
 
         $this->assertEquals(
@@ -368,12 +330,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             current($this->array),
             2
         );
-
     }
 
     public function testLast()
     {
-
         next($this->array);
 
         $this->assertEquals(
@@ -395,23 +355,19 @@ class ArrTest extends \DeimosTest\TestSetUp
             current($this->array),
             2
         );
-
     }
 
     public function testOdd()
     {
-
         $this->assertEquals(
             $this->helper()->arr()->odd([1, 2, 3, 4]),
             [1, 3],
             '', $delta = 0.0, $maxDepth = 10, true
         );
-
     }
 
     public function testEven()
     {
-
         $this->assertEquals(
             $this->helper()->arr()->even([1, 2, 3, 4]),
             [2, 4],

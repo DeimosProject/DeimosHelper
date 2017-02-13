@@ -2,7 +2,7 @@
 
 namespace DeimosTest;
 
-class TestSetUp extends \PHPUnit_Framework_TestCase
+class TestSetUp extends \PHPUnit\Framework\TestCase
 {
 
     /**
