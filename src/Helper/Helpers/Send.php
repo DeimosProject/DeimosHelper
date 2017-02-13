@@ -43,17 +43,16 @@ class Send extends AbstractHelper
      */
     protected $isJson = false;
 
-    /**
-     */
-    protected function build()
+    protected function buildTo()
     {
-        $this->ch = curl_init();
-
         if($this->to)
         {
             curl_setopt($this->ch, CURLOPT_URL, $this->to);
         }
+    }
 
+    protected function buildFiles()
+    {
         if (!empty($this->files))
         {
             curl_setopt($this->ch, CURLOPT_BINARYTRANSFER, true);
@@ -64,7 +63,10 @@ class Send extends AbstractHelper
                 $this->data[$key] = new \CURLFile($file, mime_content_type($file));
             }
         }
+    }
 
+    protected function buildMethod()
+    {
         if ($this->method === 'GET')
         {
             $this->to .= '?';
@@ -77,12 +79,25 @@ class Send extends AbstractHelper
                 curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, $this->method);
             }
         }
+    }
 
+    protected function buildJson()
+    {
         if ($this->isJson)
         {
             $this->headers[] = 'Accept: application/json';
             $this->headers[] = 'Content-Type: application/json';
         }
+    }
+
+    protected function build()
+    {
+        $this->ch = curl_init();
+
+        $this->buildTo();
+        $this->buildFiles();
+        $this->buildMethod();
+        $this->buildJson();
 
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->headers);
 
