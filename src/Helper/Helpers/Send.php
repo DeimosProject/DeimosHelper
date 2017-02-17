@@ -53,10 +53,13 @@ class Send extends AbstractHelper
 
     protected function buildFiles()
     {
+        $this->data = $this->http_build_query_develop($this->data);
+
         if (!empty($this->files))
         {
             curl_setopt($this->ch, CURLOPT_BINARYTRANSFER, true);
             curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($this->ch, CURLOPT_HTTPHEADER, ['Content-type: multipart/form-data']);
 
             foreach ($this->files as $key => $file)
             {
@@ -65,12 +68,48 @@ class Send extends AbstractHelper
         }
     }
 
+    /**
+     * patch for CURL bug
+     * @link https://bugs.php.net/bug.php?id=67477
+     *
+     * @param $data
+     *
+     * @return array
+     */
+    protected function http_build_query_develop($data)
+    {
+        if (!is_array($data))
+        {
+            return $data;
+        }
+        foreach ($data as $key => $val)
+        {
+            if (is_array($val))
+            {
+                foreach ($val as $k => $v)
+                {
+                    if (is_array($v))
+                    {
+                        $data = array_merge($data, $this->http_build_query_develop(["{$key}[{$k}]" => $v]));
+                    }
+                    else
+                    {
+                        $data["{$key}[{$k}]"] = $v;
+                    }
+                }
+
+                unset($data[$key]);
+            }
+        }
+
+        return $data;
+    }
+
     protected function buildMethod()
     {
         if ($this->method === 'GET')
         {
-            $this->to .= '?';
-            $this->data = http_build_query($this->data);
+            $this->to .= '?' . http_build_query($this->data);
         } else {
             curl_setopt($this->ch, CURLOPT_POST, 1);
 
@@ -78,6 +117,10 @@ class Send extends AbstractHelper
             {
                 curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, $this->method);
             }
+
+            $this->buildFiles();
+
+            curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->data);
         }
     }
 
@@ -95,13 +138,10 @@ class Send extends AbstractHelper
         $this->ch = curl_init();
 
         $this->buildTo();
-        $this->buildFiles();
         $this->buildMethod();
         $this->buildJson();
 
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->headers);
-
-        curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->data);
     }
 
     /**
