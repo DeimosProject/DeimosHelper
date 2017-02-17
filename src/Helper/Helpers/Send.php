@@ -137,11 +137,12 @@ class Send extends AbstractHelper
     {
         $this->ch = curl_init();
 
-        $this->buildTo();
         $this->buildMethod();
         $this->buildJson();
 
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->headers);
+
+        $this->buildTo();
     }
 
     /**
