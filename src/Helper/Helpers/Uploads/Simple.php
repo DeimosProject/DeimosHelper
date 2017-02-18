@@ -112,7 +112,7 @@ class Simple
     /**
      * @return string
      */
-    protected function tmpName()
+    public function tmpName()
     {
         return $this->tmpName;
     }
