@@ -53,10 +53,10 @@ class Send extends AbstractHelper
 
     protected function buildFiles()
     {
-        $this->data = $this->http_build_query_develop($this->data);
-
         if (!empty($this->files))
         {
+            $this->data = $this->http_build_query_develop($this->data);
+
             curl_setopt($this->ch, CURLOPT_BINARYTRANSFER, true);
             curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($this->ch, CURLOPT_HTTPHEADER, ['Content-type: multipart/form-data']);
@@ -65,6 +65,10 @@ class Send extends AbstractHelper
             {
                 $this->data[$key] = new \CURLFile($file, mime_content_type($file));
             }
+        }
+        else
+        {
+            $this->data = http_build_query($this->data);
         }
     }
 
