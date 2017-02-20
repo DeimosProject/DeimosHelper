@@ -5,10 +5,10 @@ include_once __DIR__ . '/../vendor/autoload.php';
 $builder = new \Deimos\Builder\Builder();
 $helper  = new \Deimos\Helper\Helper($builder);
 
-$bytes = 0;
+$bytes         = 0;
 $bytesIterator = 0;
-$seconds = time();
-$speed = 0;
+$seconds       = time();
+$speed         = 0;
 
 echo
 'Send file test',
@@ -24,35 +24,32 @@ PHP_EOL;
  * @var array $colors
  */
 $colors = [
-    'bracket' =>
-        [
-            'beforeSymbol' => '[',
-            'afterSymbol' => ']',
-            'color' => '1;36m',
-        ],
-    'progress' =>
-        [
-            'symbol' => '#',
-            'color' => '1;33m',
-        ],
-    'space' =>
-        [
-            'symbol' => '-',
-            'color' => '1;34m',
-        ],
+    'bracket'  => [
+        'beforeSymbol' => '[',
+        'afterSymbol'  => ']',
+        'color'        => '1;36m',
+    ],
+    'progress' => [
+        'symbol' => '#',
+        'color'  => '1;33m',
+    ],
+    'space'    => [
+        'symbol' => '-',
+        'color'  => '1;34m',
+    ],
 ];
 
 exec('tput cols', $cols);
 $cols = $cols[0];
 
 $callbackHelper = [
-    'helper' => $helper,
-    'cols' => $cols,
-    'colors' => $colors,
-    'bytes' => &$bytes,
+    'helper'        => $helper,
+    'cols'          => $cols,
+    'colors'        => $colors,
+    'bytes'         => &$bytes,
     'bytesIterator' => &$bytesIterator,
-    'seconds' => &$seconds,
-    'speed' => &$speed,
+    'seconds'       => &$seconds,
+    'speed'         => &$speed,
 ];
 
 $response = $helper->send()->to('http://ajax.deimos')
@@ -67,7 +64,7 @@ $response = $helper->send()->to('http://ajax.deimos')
         ]
     ])
     ->method('POST')
-    ->progress(function(...$p) use ($callbackHelper)
+    ->progress(function (...$p) use ($callbackHelper)
     {
         if (++$callbackHelper['bytesIterator'] % 20 === 0 && $p[3])
         {
@@ -112,15 +109,15 @@ $response = $helper->send()->to('http://ajax.deimos')
             $progressLine .= "\033[" . $callbackHelper['colors']['bracket']['color'] . $callbackHelper['colors']['bracket']['afterSymbol']; // after progress
             echo $progressLine . "\033[0G\033[0m";
 
-            if (time()-$callbackHelper['seconds'])
+            if (time() - $callbackHelper['seconds'])
             {
-                $callbackHelper['bytes'] = $p[4];
+                $callbackHelper['bytes']   = $p[4];
                 $callbackHelper['seconds'] = time();
             }
         }
     })
     ->exec();
 
-echo PHP_EOL,'complete!' , PHP_EOL;
+echo PHP_EOL, 'complete!', PHP_EOL;
 
 var_dump($response);
