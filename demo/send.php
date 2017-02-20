@@ -76,41 +76,41 @@ $response = $helper->send()->to('http://ajax.deimos')
                 $callbackHelper['speed'] = $callbackHelper['helper']->str()->fileSize($p[4] - $callbackHelper['bytes'], 0);
             }
 
-            echo "\033[3A";
+            $progressLine = "\033[3A";
 
             $percents = ($p[4] / $p[3]); // live hack :D
 
-            echo floor($percents * 100 + .1)
+            $progressLine .= floor($percents * 100 + .1)
                 . '% (speed: ~'
                 . $callbackHelper['speed']
                 . '/s; size: '
                 . $callbackHelper['helper']->str()->fileSize($p[3])
                 . ')        ';
 
-            echo "\033[3B";
-            echo "\033[0G";
+            $progressLine .= "\033[3B";
+            $progressLine .= "\033[0G";
 
             // progress
             $progress = floor(($callbackHelper['cols'] - 2) * $percents + .1);
-            echo "\033[" . $callbackHelper['colors']['bracket']['color'] . $callbackHelper['colors']['bracket']['beforeSymbol']; // before progress
+            $progressLine .= "\033[" . $callbackHelper['colors']['bracket']['color'] . $callbackHelper['colors']['bracket']['beforeSymbol']; // before progress
 
-            echo "\033[" . $callbackHelper['colors']['progress']['color'];
+            $progressLine .= "\033[" . $callbackHelper['colors']['progress']['color'];
             $i = 0;
             while ($i < $progress)
             {
-                echo $callbackHelper['colors']['progress']['symbol']; // before progress
+                $progressLine .= $callbackHelper['colors']['progress']['symbol']; // before progress
                 $i++;
             }
 
-            echo "\033[" . $callbackHelper['colors']['space']['color'];
+            $progressLine .= "\033[" . $callbackHelper['colors']['space']['color'];
             while ($i < $callbackHelper['cols'] - 2)
             {
-                echo $callbackHelper['colors']['space']['symbol']; // before progress
+                $progressLine .= $callbackHelper['colors']['space']['symbol']; // before progress
                 $i++;
             }
 
-            echo "\033[" . $callbackHelper['colors']['bracket']['color'] . $callbackHelper['colors']['bracket']['afterSymbol']; // after progress
-            echo "\033[0G\033[0m";
+            $progressLine .= "\033[" . $callbackHelper['colors']['bracket']['color'] . $callbackHelper['colors']['bracket']['afterSymbol']; // after progress
+            echo $progressLine . "\033[0G\033[0m";
 
             if (time()-$callbackHelper['seconds'])
             {
