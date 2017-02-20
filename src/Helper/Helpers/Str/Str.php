@@ -163,7 +163,7 @@ class Str extends AbstractHelper
         $i = 0;
         while($i < $length)
         {
-            $string .= $chars[\mt_rand(0, $max)];
+            $string .= $chars[\random_int(0, $max)];
             $i++;
         }
 
@@ -175,7 +175,7 @@ class Str extends AbstractHelper
      */
     public function uniqid()
     {
-        return \uniqid(\mt_rand(\PHP_INT_MIN, \PHP_INT_MAX), true);
+        return \uniqid(\random_int(\PHP_INT_MIN, \PHP_INT_MAX), true);
     }
 
     /**
