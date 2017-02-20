@@ -39,6 +39,11 @@ class Send extends AbstractHelper
     protected $headers = [];
 
     /**
+     * @var callable
+     */
+    protected $callback;
+
+    /**
      * @var bool
      */
     protected $isJson = false;
@@ -147,6 +152,12 @@ class Send extends AbstractHelper
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->headers);
 
         $this->buildTo();
+
+        if (null !== $this->callback)
+        {
+            curl_setopt($this->ch, CURLOPT_NOPROGRESS, false);
+            curl_setopt($this->ch, CURLOPT_PROGRESSFUNCTION, $this->callback);
+        }
     }
 
     /**
@@ -182,6 +193,18 @@ class Send extends AbstractHelper
     public function data(array $storage)
     {
         $this->data = $storage;
+
+        return $this;
+    }
+
+    /**
+     * @param callable $callback
+     *
+     * @return $this
+     */
+    public function progress(callable $callback)
+    {
+        $this->callback = $callback;
 
         return $this;
     }
