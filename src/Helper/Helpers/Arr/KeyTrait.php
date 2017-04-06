@@ -82,13 +82,15 @@ trait KeyTrait
     }
 
     /**
-     * @param string $key
+     * @param string $offset
      *
      * @return array
      */
-    protected function keys($key)
+    public function keys($offset)
     {
-        return explode('.', $key);
+        $offset = preg_replace('~\["?\'?(.*?)\"?\'?]~', '.$1', $offset);
+        
+        return explode('.', $offset);
     }
 
 }
