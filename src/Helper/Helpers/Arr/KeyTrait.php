@@ -88,7 +88,7 @@ trait KeyTrait
      */
     public function keys($offset)
     {
-        $offset = preg_replace('~\["?\'?(.*?)\"?\'?]~', '.$1', $offset);
+        $offset = preg_replace('~\[(?<s>[\'"]?)(.*?)(\k<s>)\]~u', '.$2', $offset);
         
         return explode('.', $offset);
     }
