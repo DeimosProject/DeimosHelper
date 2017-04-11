@@ -78,7 +78,7 @@ trait KeyTrait
      */
     public function keyExists(array $storage, $key)
     {
-        return isset($storage[$key]) || array_key_exists($key, $storage);
+        return isset($storage[$key]) || $this->get($storage, $key) !== null;
     }
 
     /**
