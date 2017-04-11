@@ -88,15 +88,18 @@ class Arr extends AbstractHelper
     {
         return shuffle($storage);
     }
-
+    
     /**
      * @param array  $storage
      * @param string $path
-     * @param mixed  $value
+     * @param string $lastKey
+     *
+     * @return array
      */
-    public function set(array &$storage, $path, $value)
+    protected function &link(array &$storage, $path, &$lastKey)
     {
         $keys = $this->keys($path);
+        $lastKey = array_pop($keys);
 
         $rows = &$storage;
         foreach ($keys as $key)
@@ -109,7 +112,29 @@ class Arr extends AbstractHelper
             $rows = &$rows[$key];
         }
 
-        $rows = $value;
+        return $rows;
+    }
+
+    /**
+     * @param array  $storage
+     * @param string $path
+     * @param mixed  $value
+     */
+    public function set(array &$storage, $path, $value)
+    {
+        $rows = &$this->link($storage, $path, $lastKey);
+
+        $rows[$lastKey] = $value;
+    }
+
+    /**
+     * @param array  $storage
+     * @param string $path
+     */
+    public function remove(array &$storage, $path)
+    {
+        $rows = &$this->link($storage, $path, $lastKey);
+        unset($rows[$lastKey]);
     }
 
     /**
