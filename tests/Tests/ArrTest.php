@@ -166,6 +166,10 @@ class ArrTest extends \DeimosTest\TestSetUp
             $this->helper()->arr()->get($storage, 'a.d.e.f.g.a.b'),
             1
         );
+
+        $this->helper()->arr()->remove($storage, 'a.b');
+
+        $this->assertNull($this->helper()->arr()->get($storage, 'a.b'));
     }
 
     public function testFirstKey()
