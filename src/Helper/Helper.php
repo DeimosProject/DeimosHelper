@@ -19,7 +19,7 @@ class Helper extends Builder
      *
      * @throws \InvalidArgumentException
      */
-    public function __construct(Builder $builder)
+    public function __construct(Builder $builder = null)
     {
         if ($builder instanceof self)
         {

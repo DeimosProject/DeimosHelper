@@ -2,8 +2,7 @@
 
 include_once __DIR__ . '/../vendor/autoload.php';
 
-$builder = new \Deimos\Builder\Builder();
-$helper  = new \Deimos\Helper\Helper($builder);
+$helper  = new \Deimos\Helper\Helper();
 
 $bytes         = 0;
 $bytesIterator = 0;

@@ -30,18 +30,6 @@ class File extends AbstractHelper
     /**
      * @param string $path
      *
-     * @return bool
-     *
-     * @deprecated use File->isFile OR Dir->isDir, as it slowly
-     */
-    public function exists($path)
-    {
-        return file_exists($path);
-    }
-
-    /**
-     * @param string $path
-     *
      * @return int
      */
     public function size($path)

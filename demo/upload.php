@@ -13,7 +13,7 @@ include_once dirname(__DIR__) . '/vendor/autoload.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
 
-    $helper = new \Deimos\Helper\Helper(new \Deimos\Builder\Builder());
+    $helper = new \Deimos\Helper\Helper();
 
     $files = $helper->uploads()->get('file');
 

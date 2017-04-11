@@ -141,7 +141,7 @@ class ArrTest extends \DeimosTest\TestSetUp
 
     public function testSet()
     {
-        $storage = ['a' => ['b' => 1]];
+        $storage = ['a' => ['b' => 1, 'd' => range(1, 10)]];
 
         $this->helper()->arr()->set($storage, 'a.b', 2);
         $this->helper()->arr()->set($storage, 'a.c', 1);
@@ -154,6 +154,11 @@ class ArrTest extends \DeimosTest\TestSetUp
 
         $this->assertEquals(
             $this->helper()->arr()->get($storage, 'a.c'),
+            1
+        );
+
+        $this->assertEquals(
+            $this->helper()->arr()->get($storage, 'a.d[0]'),
             1
         );
 

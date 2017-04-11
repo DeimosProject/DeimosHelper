@@ -23,7 +23,7 @@ trait Helper
      *
      * @throws \InvalidArgumentException
      */
-    protected final function helper()
+    protected function helper()
     {
         if (!$this->helper)
         {
@@ -38,7 +38,7 @@ trait Helper
      *
      * @throws \InvalidArgumentException
      */
-    private function instanceHelper()
+    protected function instanceHelper()
     {
         if (method_exists($this->builder, 'helper'))
         {

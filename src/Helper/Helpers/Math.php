@@ -7,6 +7,10 @@ use Deimos\Helper\AbstractHelper;
 class Math extends AbstractHelper
 {
 
+    const PI   = M_PI;
+    const PI_2 = M_PI_2;
+    const PI_4 = M_PI_4;
+
     /**
      * @param $base
      *
@@ -25,7 +29,7 @@ class Math extends AbstractHelper
      */
     public function pow($base, $exponent)
     {
-        return pow($base, $exponent);
+        return $base ** $exponent;
     }
 
     /**
